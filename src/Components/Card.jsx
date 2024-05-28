@@ -1,11 +1,22 @@
-function Card() {
+function Card({pokemon,loading}) {
+    console.log(pokemon)
     return (
      <>
-     <h3>545</h3>
-     <h2>Scolapeed</h2>
-     <h3>Poison/Bug</h3>
-    
-     <img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/545.png" alt="The best pokemon there is" />
+     {
+        loading ? <h1>Loading...</h1>:
+        pokemon.map((item)=>{
+            return(
+                <>
+    <div className="Container">
+        <h1>{item.id}</h1>
+        <h2>{item.name}</h2>
+        <img src={item.sprites.front_default} alt="The best pokemon there is" />
+     </div>
+                </>
+            )
+        })
+
+     }
      </>
     );
   }
