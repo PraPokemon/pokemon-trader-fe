@@ -17,6 +17,51 @@ function PokedexCardGroup() {
       <div className="Container">
         <Card />
       </div>
+
+      <div className="Container">
+        <Card />
+      </div>
+      <div className="Container">
+        <Card />
+      </div>
+      <div className="Container">
+        <Card />
+      </div>
+      <div className="Container">
+        <Card />
+      </div>
+      <div className="Container">
+        <Card />
+      </div>
+
+      <div className="Container">
+        <Card />
+      </div>
+      <div className="Container">
+        <Card />
+      </div>
+      <div className="Container">
+        <Card />
+      </div>
+      <div className="Container">
+        <Card />
+      </div>
+      <div className="Container">
+        <Card />
+      </div>
+
+      <div className="Container">
+        <Card />
+      </div>
+      <div className="Container">
+        <Card />
+      </div>
+      <div className="Container">
+        <Card />
+      </div>
+      <div className="Container">
+        <Card />
+      </div>
       <div className="Container">
         <Card />
       </div>
