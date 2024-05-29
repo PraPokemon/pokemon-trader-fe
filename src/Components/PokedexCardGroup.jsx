@@ -3,8 +3,7 @@ import { useState } from "react";
 import { useEffect } from "react";
 import axios from "axios";
 function PokedexCardGroup() {
-    
-    const [pokeData, setPokeData] = useState([]);
+  const [pokeData, setPokeData] = useState([]);
   const [loading, setLoading] = useState(true);
   const [url, setUrl] = useState("https://pokeapi.co/api/v2/pokemon/");
   const [NextUrl, setNextUrl] = useState();
@@ -17,7 +16,6 @@ function PokedexCardGroup() {
     setPreviousUrl(results.data.previous);
     getPokemon(results.data.results);
     setLoading(false);
-    
   };
 
   const getPokemon = async (results) => {
@@ -36,9 +34,7 @@ function PokedexCardGroup() {
 
   return (
     <>
-      
-        <Card pokemon={pokeData} loading={loading}/>
-      
+      <Card pokemon={pokeData} loading={loading} />
     </>
   );
 }

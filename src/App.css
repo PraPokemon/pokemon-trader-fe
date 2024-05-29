@@ -1,26 +1,54 @@
-body{
-    background-color: #F4E04D;
+body {
+  background-color: #f4e04d;
 }
 
-  .Container{
-    width: 70vW;
-    margin: 10px;
-    background-color:#F2ED6F;
-    border-radius: 1rem;
-    padding: 0 1.5rem;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    box-sizing: border-box;
-  }
+.Container {
+  width: 70vw;
+  margin: 10px;
+  background-color: #f2ed6f;
+  border-radius: 1rem;
+  padding: 0 1.5rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  box-sizing: border-box;
+}
 
-  .PokedexCardGroup{
-    background-color:beige;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    box-sizing: border-box;
-    flex-wrap: wrap;
-   
-  }
+.PokedexCardGroup {
+  background-color: beige;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-sizing: border-box;
+  flex-wrap: wrap;
+}
 
+.FilterGroup {
+  width: 90vw;
+  border-radius: 1rem;
+  background-color: beige;
+  margin: 20px;
+  padding: 15px;
+  gap: 10px;
+}
+.FilterGroupTop{
+  display: flex;
+  justify-content:space-between;
+  flex-wrap: wrap;
+}
+.FilterGroupBottom{
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+.typeFilterButon {
+  padding: 10px;
+  height: 125px;
+  width: 125px;
+  margin: auto;
+  border-radius: 50%;
+  border: 0;
+  background-color: blanchedalmond;
+  cursor: pointer;
+}
