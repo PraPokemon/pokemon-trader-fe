@@ -6,19 +6,13 @@ import Navbar from "./Components/Navbar";
 function App() {
   return (
     <>
-      <Navbar/>
+      <Navbar />
       <div className="FilterGroup">
         <FilterGroup />
       </div>
       <div className="PokedexCardGroup">
         <PokedexCardGroup />
       </div>
-      <button type="button" className="btn btn-outline-dark">
-        Dark
-      </button>
-      <button type="button" className="btn btn-outline-dark">
-        Dark
-      </button>
     </>
   );
 }

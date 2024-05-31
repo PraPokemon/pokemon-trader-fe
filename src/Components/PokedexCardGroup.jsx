@@ -14,18 +14,17 @@ function PokedexCardGroup() {
     const results = await axios.get(url);
     setNextUrl(results.data.next);
     setPreviousUrl(results.data.previous);
-    getPokemon(results.data.results);
+    await getPokemon(results.data.results);
     setLoading(false);
   };
 
   const getPokemon = async (results) => {
-    results.map(async (item) => {
+    const promises = results.map(async (item) => {
       const result = await axios.get(item.url);
-      setPokeData((state) => {
-        state = [...state, result.data];
-        return state;
-      });
+      return result.data;
     });
+    const resolvedResults = await Promise.all(promises);
+    setPokeData(resolvedResults);
   };
 
   useEffect(() => {
@@ -34,7 +33,32 @@ function PokedexCardGroup() {
 
   return (
     <>
-      <Card pokemon={pokeData} loading={loading} />
+    <div>
+    <Card pokemon={pokeData} loading={loading} />
+      <div>
+        <button
+          onClick={() => {
+            setPokeData([])
+            setUrl(PreviousUrl);
+          }}
+          type="button"
+          className="btn btn-outline-dark"
+        >
+          Back
+        </button>
+        <button
+          onClick={() => {
+            setPokeData([])
+            setUrl(NextUrl);
+          }}
+          type="button"
+          className="btn btn-outline-dark"
+        >
+          Forward
+        </button>
+      </div>
+    </div>
+      
     </>
   );
 }

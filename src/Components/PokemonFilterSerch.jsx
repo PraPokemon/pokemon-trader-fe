@@ -2,7 +2,7 @@ function PokemonFilterSerch() {
     return (
       <>
       <h4>Pokemon:</h4>
-        <input style={{textAlign: 'end'}}>
+        <input className="InputBox" style={{height: "30px", textAlign: 'end'}}>
         </input>
       </>
     );
