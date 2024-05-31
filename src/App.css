@@ -29,17 +29,25 @@ body {
   background-color: beige;
   margin: 20px;
   padding: 15px;
-  gap: 10px;
+  gap: 15px;
 }
 .FilterGroupTop{
   display: flex;
   justify-content:space-between;
   flex-wrap: wrap;
+  padding: 5px;
 }
 .FilterGroupBottom{
   display: flex;
   justify-content: center;
   flex-wrap: wrap;
+  padding: 20px;
+}
+.FilterGroupOther{
+  display: flex;
+  justify-content:end;
+  gap: 5px;
+  padding: 15px;
 }
 
 .typeFilterButon {

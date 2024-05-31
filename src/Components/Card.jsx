@@ -14,7 +14,7 @@ function Card({ pokemon, loading }) {
                 <h2>{item.name}</h2>
                 <img
                   src={item.sprites.front_default}
-                  alt="The best pokemon there is"
+                  alt={item.id}
                 />
               </div>
             </>

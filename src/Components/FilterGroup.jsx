@@ -1,4 +1,6 @@
 import TypeFilterButon from "./TypeFilterButon";
+import PokemonFilterSerch from "./PokemonFilterSerch";
+import FilterLvLMax from "./FilterLvLMax";
 function FilterGroup() {
   return (
     <>
@@ -23,6 +25,10 @@ function FilterGroup() {
         <TypeFilterButon />
         <TypeFilterButon />
         <TypeFilterButon />
+      </div>
+      <div className="FilterGroupOther">
+       <PokemonFilterSerch/>
+       <FilterLvLMax/>
       </div>
     </>
   );
