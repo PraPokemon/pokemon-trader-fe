@@ -4,6 +4,7 @@ import App from "./App.jsx";
 import "bootstrap/dist/css/bootstrap.css";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import PokedexEntrie from "./Pages/PokedexEntrie.jsx";
+import Inventory from "./Pages/Inventory.jsx";
 
 const router = createBrowserRouter([
   {
@@ -11,8 +12,12 @@ const router = createBrowserRouter([
     element: <App/>,
   },
   {
-    path: "PokedexEntrie",
+    path: "/PokedexEntrie",
     element: <PokedexEntrie/>,
+  },
+  {
+    path: "/Inventory",
+    element: <Inventory/>,
   },
 ]);
 

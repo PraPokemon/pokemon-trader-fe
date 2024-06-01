@@ -1,12 +1,19 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap');
+*{
+  font-family: "Roboto", sans-serif;
+  font-weight: 400;
+  font-style: normal;
+}
+
 body {
-  background-color: beige !important;
+  
 }
 
 .Container {
-  width: 70vw;
+  width: 90vw;
   margin: 10px;
-  background-color: #cee397;
-  border-left: 10px solid #8db1ab;
+  background-color: #FDE74C;
+  border-left: 10px solid #5BC0EB;
   border-radius: 1rem;
   padding: 0 1.5rem;
   display: flex;
@@ -27,19 +34,23 @@ body {
 .FilterGroup {
   border-end-end-radius: 1rem;
   border-top-left-radius: 1rem;
-  background-color: #cee397;
+  background-color: #FDE74C;
   margin: 20px;
   padding: 15px;
   gap: 15px;
-  border-top: 10px solid #8db1ab;
-  border-left: 10px solid #8db1ab;
+  border-top: 10px solid #5BC0EB;
+  border-left: 10px solid #5BC0EB;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-wrap: wrap;
 }
 
 .FilterGroupOther {
   display: flex;
-  justify-content: space-evenly;
-  gap: 5px;
-  padding: 15px;
+  justify-content:space-between;
+  gap: 200px;
+  padding: 10px;
 }
 .FilterLvL {
   display: flex;
@@ -47,19 +58,19 @@ body {
 }
 
 .InputBox{
-  background-color: #d5e5ac;
-  border-color: #587792;
-  border-left: 5px solid #8db1ab;
+  background-color: white;
+  border-color: #9BC53D;
+  border-left: 5px solid #5BC0EB;
   border-radius: 1rem;
 }
 
 .FilterTypeButon {
-  height: 130px;
-  width: 130px;
+  height: 110px;
+  width: 110px;
   border-radius: 50%;
   cursor: pointer;
   overflow: hidden;
-  border: beige solid 5px;
+  border: white solid 5px;
 
   display: flex;
   justify-content: center;
@@ -71,8 +82,9 @@ body {
   margin: 5px;
 }
 .FilterTypeButonGroup {
+  width: 80vw;
   display: flex;
-  flex-wrap:wrap;
-  justify-content:space-evenly;
-  align-items: center;
+  flex-wrap: wrap;
+  justify-content: space-around;
 }
+
