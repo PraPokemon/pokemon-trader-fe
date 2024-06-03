@@ -1,6 +1,7 @@
 
 import PokemonFilterSerch from "./PokemonFilterSerch";
 import FilterLvL from "./FilterLvL";
+import addToInventoryButon from "./AddToInventoryButon";
 function FilterGroup() {
   const imagePaths = [
     "/bug_type_symbol_anime_by_jormxdos_dfgb667.png",
@@ -38,6 +39,7 @@ function FilterGroup() {
         <div>
           <FilterLvL />
         </div>
+        <addToInventoryButon/>
       </div>
     </>
   );

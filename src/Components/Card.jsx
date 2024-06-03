@@ -1,9 +1,8 @@
 import React, { useState } from "react";
-import { Toast } from "bootstrap";
+import AddToInventoryButon from "./AddToInventoryButon";
 
 function Card({ pokemon, loading }) {
   const [expansionStates, setExpansionStates] = useState({});
-  const [showToast, setShowToast] = useState(false);
 
   const handleExpandClick = (itemId) => {
     setExpansionStates((prevStates) => ({
@@ -12,10 +11,7 @@ function Card({ pokemon, loading }) {
     }));
   };
 
-  const addToInventory = () => {
-    console.log("Item added to inventory");
-    showToast(true);
-  };
+  
 
   return (
     <>
@@ -58,10 +54,9 @@ function Card({ pokemon, loading }) {
                     <h4>Weight: </h4>
                     <h4>{item.weight} lb</h4>
                   </div>
-                  <button className="ButonBasic" onClick={addToInventory}>Add to Inventory</button>
+                  <AddToInventoryButon/>
                 </div>
               )}
-              
             </div>
           );
         })
