@@ -5,6 +5,7 @@ import "bootstrap/dist/css/bootstrap.css";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import PokedexEntrie from "./Pages/PokedexEntrie.jsx";
 import Inventory from "./Pages/Inventory.jsx";
+import TradingPage from "./Pages/TraidingPage.jsx";
 
 const router = createBrowserRouter([
   {
@@ -18,6 +19,10 @@ const router = createBrowserRouter([
   {
     path: "/Inventory",
     element: <Inventory/>,
+  },
+  {
+    path: "/Trading",
+    element: <TradingPage/>,
   },
 ]);
 

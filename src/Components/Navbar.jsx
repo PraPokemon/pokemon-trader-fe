@@ -5,7 +5,7 @@ function Navbar() {
     <>
       <nav class="navbar navbar-expand-lg bg-body-tertiary">
         <div class="container-fluid">
-          <Link class="navbar-brand" to="/">
+          <Link class="navbar-brand" to="/Trading">
             Tradeporeon
           </Link>
           <button
@@ -32,9 +32,9 @@ function Navbar() {
                 </Link>
               </li>
               <li className="ProfileButon nav-item">
-                <a className="nav-link " aria-disabled="true">
+                <Link className="nav-link " aria-disabled="true">
                   PlaceholderTrainerName
-                </a>
+                </Link>
               </li>
             </ul>
           </div>

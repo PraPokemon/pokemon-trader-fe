@@ -15,10 +15,31 @@
   border-left: 10px solid #5BC0EB;
   border-radius: 1rem;
   padding: 0 1.5rem;
+}
+
+.ContainerButon{
+  width: 70vw;
+  border: 0;
+  background-color: transparent;
   display: flex;
   align-items: center;
   justify-content: space-between;
-  box-sizing: border-box;
+  margin: 10px;
+}
+
+.ButonBasic{
+  color: white;
+  border: 0;
+  background-color: #9BC53D;
+  border-radius: 1rem;
+  border-left: 10px solid #5BC0EB;
+}
+
+.expandedCardContent{
+  margin: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
 }
 
 .PokedexCardGroup {
@@ -45,9 +66,9 @@
 }
 
 .FilterGroupOther {
+  width: 100%;
   display: flex;
-  justify-content:space-between;
-  gap: 200px;
+  justify-content:space-around;
   padding: 10px;
 }
 .FilterLvL {

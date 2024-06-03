@@ -1,9 +1,20 @@
-import { useNavigate } from "react-router-dom";
+import React, { useState } from "react";
+import { Toast } from "bootstrap";
 
 function Card({ pokemon, loading }) {
-  const navigate = useNavigate();
-  const handleNavigation = (itemId) => {
-    navigate(`/pokemon/${itemId}`, { state: { itemId, ...otherPokemonData } });
+  const [expansionStates, setExpansionStates] = useState({});
+  const [showToast, setShowToast] = useState(false);
+
+  const handleExpandClick = (itemId) => {
+    setExpansionStates((prevStates) => ({
+      ...prevStates,
+      [itemId]: !prevStates[itemId],
+    }));
+  };
+
+  const addToInventory = () => {
+    console.log("Item added to inventory");
+    showToast(true);
   };
 
   return (
@@ -15,21 +26,42 @@ function Card({ pokemon, loading }) {
       ) : (
         pokemon.map((item) => {
           return (
-            <div>
-              {pokemon.map((item) => (
-                <div key={item.id} onClick={() => handleNavigation(item.id)}>
-                  <button className="Container">
-                    <h1>{item.id}</h1>
-                    <h2>{item.name}</h2>
-                    <div className="TypesPokedex">
-                      {item.types.map((type) => (
-                        <h4>{type.type.name}</h4>
-                      ))}
-                    </div>
-                    <img src={item.sprites.front_default} alt={item.id} />
-                  </button>
+            <div
+              className="Container"
+              key={item.id}
+              onClick={() => handleExpandClick(item.id)}
+            >
+              <button className="ContainerButon">
+                <h1>{item.id}</h1>
+                <h2>{item.name}</h2>
+                <div className="TypesPokedex">
+                  {item.types.map((type) => (
+                    <h4>{type.type.name}</h4>
+                  ))}
                 </div>
-              ))}
+                <img src={item.sprites.front_default} alt={item.id} />
+              </button>
+
+              {expansionStates[item.id] && (
+                <div className="ContainerButon">
+                  <div className="TypesPokedex">
+                    <h4>Abilities: </h4>
+                    {item.abilities.map((abilities) => (
+                      <h5>{abilities.ability.name}</h5>
+                    ))}
+                  </div>
+                  <div>
+                    <h4>height: </h4>
+                    <h4>{item.height} ft</h4>
+                  </div>
+                  <div>
+                    <h4>Weight: </h4>
+                    <h4>{item.weight} lb</h4>
+                  </div>
+                  <button className="ButonBasic" onClick={addToInventory}>Add to Inventory</button>
+                </div>
+              )}
+              
             </div>
           );
         })
