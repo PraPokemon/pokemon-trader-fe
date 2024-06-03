@@ -5,9 +5,9 @@ function Navbar() {
     <>
       <nav class="navbar navbar-expand-lg bg-body-tertiary">
         <div class="container-fluid">
-          <a class="navbar-brand" href="#">
+          <Link class="navbar-brand" to="/">
             Tradeporeon
-          </a>
+          </Link>
           <button
             class="navbar-toggler"
             type="button"
@@ -27,8 +27,13 @@ function Navbar() {
                 </Link>
               </li>
               <li className="nav-item">
-                <a className="nav-link " aria-disabled="false">
+                <Link className="nav-link " to="/">
                   Pokedex
+                </Link>
+              </li>
+              <li className="ProfileButon nav-item">
+                <a className="nav-link " aria-disabled="true">
+                  PlaceholderTrainerName
                 </a>
               </li>
             </ul>

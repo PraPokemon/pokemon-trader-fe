@@ -1,5 +1,11 @@
+import { useNavigate } from "react-router-dom";
+
 function Card({ pokemon, loading }) {
-  console.log(pokemon);
+  const navigate = useNavigate();
+  const handleNavigation = (itemId) => {
+    navigate(`/pokemon/${itemId}`, { state: { itemId, ...otherPokemonData } });
+  };
+
   return (
     <>
       {loading ? (
@@ -9,18 +15,22 @@ function Card({ pokemon, loading }) {
       ) : (
         pokemon.map((item) => {
           return (
-            <>
-              <div className="Container">
-                <h1>{item.id}</h1>
-                <h2>{item.name}</h2>
-                <div className="TypesPokedex">
-                  {item.types.map(type =>(
-                    <h4>{type.type.name}</h4>
-                  ))}
+            <div>
+              {pokemon.map((item) => (
+                <div key={item.id} onClick={() => handleNavigation(item.id)}>
+                  <button className="Container">
+                    <h1>{item.id}</h1>
+                    <h2>{item.name}</h2>
+                    <div className="TypesPokedex">
+                      {item.types.map((type) => (
+                        <h4>{type.type.name}</h4>
+                      ))}
+                    </div>
+                    <img src={item.sprites.front_default} alt={item.id} />
+                  </button>
                 </div>
-                <img src={item.sprites.front_default} alt={item.id} />
-              </div>
-            </>
+              ))}
+            </div>
           );
         })
       )}

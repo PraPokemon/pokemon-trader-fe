@@ -35,7 +35,7 @@ function PokedexCardGroup() {
     <>
     <div>
     <Card pokemon={pokeData} loading={loading} />
-      <div>
+      <div className="PokedexCardButons">
         <button
           onClick={() => {
             setPokeData([])
