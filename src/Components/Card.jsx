@@ -6,19 +6,18 @@ function Card({ pokemon, loading }) {
 
   const handleExpandClick = (itemId) => {
     setExpansionStates((prevStates) => ({
-     ...prevStates,
-      [itemId]:!prevStates[itemId],
+      ...prevStates,
+      [itemId]: !prevStates[itemId],
     }));
   };
 
   const handleExpandedContentClick = (e) => {
-    e.stopPropagation(); // Stop event propagation
-    // Any additional logic for handling clicks on the expanded content can go here
+    e.stopPropagation();
   };
 
   return (
     <>
-      {loading? (
+      {loading ? (
         <div className="spinner-border" role="status">
           <span className="visually-hidden">Loading...</span>
         </div>
@@ -38,11 +37,17 @@ function Card({ pokemon, loading }) {
                     <h4>{type.type.name}</h4>
                   ))}
                 </div>
+                <div className="PokemonIcon">
                 <img src={item.sprites.front_default} alt={item.id} />
+                </div>
+                
               </button>
 
               {expansionStates[item.id] && (
-                <div className="ContainerButon" onClick={handleExpandedContentClick}>
+                <div
+                  className="ContainerButon"
+                  onClick={handleExpandedContentClick}
+                >
                   <div className="TypesPokedex">
                     <h4>Abilities: </h4>
                     {item.abilities.map((abilities) => (
@@ -58,7 +63,7 @@ function Card({ pokemon, loading }) {
                     <h4>{item.weight} lb</h4>
                   </div>
                   <div>
-                    <AddToInventoryButon/>
+                    <AddToInventoryButon />
                   </div>
                 </div>
               )}

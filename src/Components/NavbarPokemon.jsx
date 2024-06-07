@@ -3,14 +3,15 @@ import Container from "react-bootstrap/Container";
 import Nav from "react-bootstrap/Nav";
 import Navbar from "react-bootstrap/Navbar";
 
+
 function NavbarPokemon() {
   return (
     <>
       <Navbar
         expand="lg"
         className="PokemonNavbar bg-body-tertiary"
-        bg="dark"
-        variant="warning"
+        bg="primary"
+        variant="light"
       >
         <Container>
           <Navbar.Brand as={Link} to="/Trading">Poketrader</Navbar.Brand>
@@ -20,8 +21,7 @@ function NavbarPokemon() {
               <Nav.Link as={Link} to="/Pokedex">Pokedex</Nav.Link>
               <Nav.Link as={Link} to="/inventory">Inventory</Nav.Link>
             </Nav>
-            {/* Aligning the sign-in text to the right */}
-            <Navbar.Text className="ms-auto text-yellow">
+            <Navbar.Text>
               Signed in as: <a href="#login">Mark Otto</a>
             </Navbar.Text>
           </Navbar.Collapse>
