@@ -20,7 +20,6 @@ function NavbarPokemon() {
               <Nav.Link as={Link} to="/Pokedex">Pokedex</Nav.Link>
               <Nav.Link as={Link} to="/Inventory">Inventory</Nav.Link>
             </Nav>
-            {/* Aligning the sign-in text to the right */}
             <Navbar.Text className="ms-auto text-yellow">
               Signed in as: <a href="#login">Mark Otto</a>
             </Navbar.Text>

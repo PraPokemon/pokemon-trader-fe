@@ -9,6 +9,10 @@ import TradingPage from "./Pages/TraidingPage.jsx";
 
 const router = createBrowserRouter([
   {
+    path: "/Trading",
+    element: <TradingPage/>,
+  },
+  {
     path: "/Pokedex",
     element: <App/>,
   },
@@ -20,10 +24,7 @@ const router = createBrowserRouter([
     path: "/Inventory",
     element: <Inventory/>,
   },
-  {
-    path: "/Trading",
-    element: <TradingPage/>,
-  },
+  
 ]);
 
 ReactDOM.createRoot(document.getElementById("root")).render(
