@@ -18,7 +18,7 @@ function NavbarPokemon() {
           <Navbar.Collapse id="basic-navbar-nav">
             <Nav className="me-auto">
               <Nav.Link as={Link} to="/Pokedex">Pokedex</Nav.Link>
-              <Nav.Link as={Link} to="/inventory">Inventory</Nav.Link>
+              <Nav.Link as={Link} to="/Inventory">Inventory</Nav.Link>
             </Nav>
             {/* Aligning the sign-in text to the right */}
             <Navbar.Text className="ms-auto text-yellow">

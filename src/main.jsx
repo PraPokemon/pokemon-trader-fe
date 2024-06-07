@@ -9,7 +9,7 @@ import TradingPage from "./Pages/TraidingPage.jsx";
 
 const router = createBrowserRouter([
   {
-    path: "/",
+    path: "/Pokedex",
     element: <App/>,
   },
   {
