@@ -9,7 +9,7 @@ import TradingPage from "./Pages/TraidingPage.jsx";
 
 const router = createBrowserRouter([
   {
-    path: "/Trading",
+    path: "/",
     element: <TradingPage/>,
   },
   {
