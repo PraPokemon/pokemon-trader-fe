@@ -1,10 +1,9 @@
 
 import PokemonFilterSerch from "./PokemonFilterSerch";
 import FilterLvL from "./FilterLvL";
-import addToInventoryButon from "./AddToInventoryButon";
 function FilterGroup() {
   const imagePaths = [
-    "/bug_type_symbol_anime_by_jormxdos_dfgb667.png",
+    // "/bug_type_symbol_anime_by_jormxdos_dfgb667.png",
     // "/dark_type_symbol_anime_by_jormxdos_dfgb681.png",
     // "/dragon_type_symbol_anime_by_jormxdos_dfgb67k.png",
     // "electric_type_symbol_anime_by_jormxdos_dfgb63a.png",
@@ -21,7 +20,7 @@ function FilterGroup() {
     // "psychic_type_symbol_anime_by_jormxdos_dfgb65w.png",
     // "rock_type_symbol_anime_by_jormxdos_dfgb66n.png",
     // "steel_type_symbol_anime_by_jormxdos_dfgb68e.png",
-    // "water_type_symbol_anime_by_jormxdos_dfgb62y.png",
+    "water_type_symbol_anime_by_jormxdos_dfgb62y.png",
   ];
   return (
     <>
@@ -35,11 +34,11 @@ function FilterGroup() {
       <div className="FilterGroupOther">
         <div>
           <PokemonFilterSerch />
+   
         </div>
         <div>
           <FilterLvL />
         </div>
-        <addToInventoryButon/>
       </div>
     </>
   );
