@@ -2,6 +2,7 @@ import Card from "./Card";
 import { useState } from "react";
 import { useEffect } from "react";
 import axios from "axios";
+import Button from 'react-bootstrap/Button';
 function PokedexCardGroup() {
   const [pokeData, setPokeData] = useState([]);
   const [loading, setLoading] = useState(true);
@@ -36,26 +37,17 @@ function PokedexCardGroup() {
     <div>
     <Card pokemon={pokeData} loading={loading} />
       <div className="PokedexCardButons">
-        <button
-          onClick={() => {
+        <Button variant="success" onClick={() => {
             setPokeData([])
             setUrl(PreviousUrl);
           }}
-          type="button"
-          className="btn btn-outline-dark"
-        >
-          Back
-        </button>
-        <button
-          onClick={() => {
+          type="button">Previous</Button>{' '}
+        
+        <Button variant="success" onClick={() => {
             setPokeData([])
             setUrl(NextUrl);
           }}
-          type="button"
-          className="btn btn-outline-dark"
-        >
-          Forward
-        </button>
+          type="button">Next</Button>{' '}
       </div>
     </div>
       

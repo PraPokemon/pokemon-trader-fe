@@ -1,7 +1,8 @@
 import React, { useState } from "react";
-import AddToInventoryButon from "./AddToInventoryButon";
+import AddToInventoryButton from "./addToInventoryButton";
 
 function Card({ pokemon, loading }) {
+  
   const [expansionStates, setExpansionStates] = useState({});
 
   const handleExpandClick = (itemId) => {
@@ -63,7 +64,7 @@ function Card({ pokemon, loading }) {
                     <h4>{item.weight} lb</h4>
                   </div>
                   <div>
-                    <AddToInventoryButon />
+                  <AddToInventoryButton pokemon={item} />
                   </div>
                 </div>
               )}

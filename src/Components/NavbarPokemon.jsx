@@ -22,6 +22,7 @@ function NavbarPokemon() {
               <Nav.Link as={Link} to="/inventory">Inventory</Nav.Link>
             </Nav>
             <Navbar.Text>
+              {/* Promjeni kada se setupaju baze za koriniske */}
               Signed in as: <a href="#login">Mark Otto</a>
             </Navbar.Text>
           </Navbar.Collapse>

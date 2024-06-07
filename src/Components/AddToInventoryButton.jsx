@@ -3,14 +3,23 @@ import Button from "react-bootstrap/Button";
 import Modal from "react-bootstrap/Modal";
 import Form from "react-bootstrap/Form";
 
-function addToInventoryButon() {
+function addToInventoryButton({ pokemon }) {
   const [show, setShow] = useState(false);
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
 
   const [sliderValue, setSliderValue] = useState(50);
   const handleSliderChange = (e) => {
-    setSliderValue(e.target.value); 
+    setSliderValue(e.target.value);
+  };
+
+  // Function to map moves to option elements
+  const renderMoveOptions = (moves) => {
+    return moves.map((move, index) => (
+      <option key={index} value={move.move.url}>
+        {move.move.name}
+      </option>
+    ));
   };
 
   return (
@@ -24,30 +33,41 @@ function addToInventoryButon() {
           <Modal.Title>Add Pokemon</Modal.Title>
         </Modal.Header>
         <Modal.Body>
-         <Form.Label>Moves</Form.Label>
-          <Form.Select aria-label="Default select example" id="move1">
+          <Form.Label>Moves</Form.Label>
+          <Form.Select
+            aria-label="Default select example"
+            id="move1"
+            style={{ margin: "5px" }}
+          >
             <option>Open this select menu</option>
-            <option value="1">One</option>
-            <option value="2">Two</option>
-            <option value="3">Three</option>
+            {pokemon && renderMoveOptions(pokemon.moves)}
           </Form.Select>
-          <Form.Select aria-label="Default select example" id="move2">
+
+          <Form.Select
+            aria-label="Default select example"
+            id="move1"
+            style={{ margin: "5px" }}
+          >
             <option>Open this select menu</option>
-            <option value="1">One</option>
-            <option value="2">Two</option>
-            <option value="3">Three</option>
+            {pokemon && renderMoveOptions(pokemon.moves)}
           </Form.Select>
-          <Form.Select aria-label="Default select example" id="move3">
+
+          <Form.Select
+            aria-label="Default select example"
+            id="move3"
+            style={{ margin: "5px" }}
+          >
             <option>Open this select menu</option>
-            <option value="1">One</option>
-            <option value="2">Two</option>
-            <option value="3">Three</option>
+            {pokemon && renderMoveOptions(pokemon.moves)}
           </Form.Select>
-          <Form.Select aria-label="Default select example" id="move4">
+
+          <Form.Select
+            aria-label="Default select example"
+            id="move4"
+            style={{ margin: "5px" }}
+          >
             <option>Open this select menu</option>
-            <option value="1">One</option>
-            <option value="2">Two</option>
-            <option value="3">Three</option>
+            {pokemon && renderMoveOptions(pokemon.moves)}
           </Form.Select>
 
           <div className="outer">
@@ -62,7 +82,6 @@ function addToInventoryButon() {
               />
             </div>
           </div>
-
         </Modal.Body>
         <Modal.Footer>
           <Button variant="secondary" onClick={handleClose}>
@@ -77,4 +96,4 @@ function addToInventoryButon() {
   );
 }
 
-export default addToInventoryButon;
+export default addToInventoryButton;
