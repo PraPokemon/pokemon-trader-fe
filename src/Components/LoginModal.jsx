@@ -2,6 +2,7 @@ import { useState } from "react";
 import Button from "react-bootstrap/Button";
 import Modal from "react-bootstrap/Modal";
 import { Form } from "react-bootstrap";
+import { Link } from "react-router-dom";
 
 function loginModal() {
   const [show, setShow] = useState(true);
@@ -38,6 +39,7 @@ function loginModal() {
           </>
         </Modal.Body>
         <Modal.Footer>
+         <Link as={Link} to="">Sign Up</Link>
           <Button variant="secondary" onClick={handleClose}>
             Close
           </Button>

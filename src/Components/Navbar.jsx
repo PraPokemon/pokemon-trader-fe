@@ -21,7 +21,7 @@ function NavbarPokemon() {
               <Nav.Link as={Link} to="/Inventory">Inventory</Nav.Link>
             </Nav>
             <Navbar.Text className="ms-auto text-yellow">
-              Signed in as: <a href="#login">Mark Otto</a>
+              Signed in as: <a href="#login">Lord-Helix</a>
             </Navbar.Text>
           </Navbar.Collapse>
         </Container>
