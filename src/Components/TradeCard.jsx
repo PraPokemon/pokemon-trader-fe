@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import AddToInventoryButton from "./addToInventoryButton";
+
 
 function TradeCard({ pokemon, loading }) {
   
@@ -63,9 +63,7 @@ function TradeCard({ pokemon, loading }) {
                     <h4>Weight: </h4>
                     <h4>{item.weight} lb</h4>
                   </div>
-                  <div>
-                  <AddToInventoryButton pokemon={item} />
-                  </div>
+                  
                 </div>
               )}
             </div>

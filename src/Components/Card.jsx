@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import AddToInventoryButton from "./addToInventoryButton";
+import AddToInventoryButton from "./AddToInventoryButton";
 
 function Card({ pokemon, loading }) {
   
