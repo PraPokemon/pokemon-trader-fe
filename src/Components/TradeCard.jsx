@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import AddToInventoryButton from "./addToInventoryButton";
 
-function Card({ pokemon, loading }) {
+function TradeCard({ pokemon, loading }) {
   
   const [expansionStates, setExpansionStates] = useState({});
 
@@ -76,4 +76,4 @@ function Card({ pokemon, loading }) {
   );
 }
 
-export default Card;
+export default TradeCard;

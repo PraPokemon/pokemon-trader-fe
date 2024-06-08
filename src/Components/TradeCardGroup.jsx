@@ -1,9 +1,9 @@
-import Card from "./Card";
 import { useState } from "react";
 import { useEffect } from "react";
 import axios from "axios";
 import Button from "react-bootstrap/Button";
-function PokedexCardGroup() {
+import TradeCard from "./TradeCard";
+function TradeCardGroup() {
   const [pokeData, setPokeData] = useState([]);
   const [loading, setLoading] = useState(true);
   const [url, setUrl] = useState("https://pokeapi.co/api/v2/pokemon/");
@@ -35,7 +35,7 @@ function PokedexCardGroup() {
   return (
     <>
       <div>
-        <Card pokemon={pokeData} loading={loading} />
+        <TradeCard pokemon={pokeData} loading={loading} />
         <div className="PokedexCardButons">
           <Button
             variant="success"
@@ -65,4 +65,4 @@ function PokedexCardGroup() {
   );
 }
 
-export default PokedexCardGroup;
+export default TradeCardGroup;

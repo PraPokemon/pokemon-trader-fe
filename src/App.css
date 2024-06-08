@@ -27,6 +27,14 @@
   margin: 10px;
 }
 
+.PokemonIcon{
+  border-radius: 50%;
+  background-color: white !important;
+  margin: 5px;
+  border: 5px solid #5BC0EB;
+}
+
+
 .ButonBasic{
   color: white;
   border: 0;
@@ -108,9 +116,10 @@
 }
 
 .PokedexCardButons{
-  width: 150px;
+  width: 100%;
+  margin: 20px;
   display: flex;
-  justify-content: space-between;
+  justify-content: center;
 }
 
 .ProfileButon{

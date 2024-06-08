@@ -1,5 +1,6 @@
 import Navbar from "../Components/Navbar";
 import FilterGroup from "../Components/FilterGroup";
+import TradeCardGroup from "../Components/TradeCardGroup";
 
 function TradingPage() {
     return (
@@ -8,6 +9,8 @@ function TradingPage() {
       <div className="FilterGroup">
         <FilterGroup />
       </div>
+       <TradeCardGroup/>
+
       </>
     );
   }
