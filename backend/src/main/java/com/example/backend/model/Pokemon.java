@@ -6,13 +6,17 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.AllArgsConstructor;
 
-@Document(collection = "userPokemon")
+@Document(collection = "pokemon")
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-public class UserPokemon {
+public class Pokemon {
     @Id
-    private int userPokemonId;
-    private int userId;
     private int pokemonId;
+    private String name;
+    private String type;
+    private int level;
+    private String move;
+    private String flavorText;
+    private String evolutions;
 }

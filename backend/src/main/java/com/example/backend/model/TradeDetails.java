@@ -6,13 +6,14 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.AllArgsConstructor;
 
-@Document(collection = "userPokemon")
+@Document(collection = "tradeDetails")
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-public class UserPokemon {
+public class TradeDetails {
     @Id
+    private int tradeDetailId;
+    private int tradeId;
     private int userPokemonId;
-    private int userId;
-    private int pokemonId;
+    private TradeDirection direction;  
 }
