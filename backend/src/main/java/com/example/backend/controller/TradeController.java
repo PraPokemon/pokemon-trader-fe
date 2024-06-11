@@ -1,7 +1,7 @@
 package com.example.backend.controller;
 
 import com.example.backend.model.Trade;
-import com.example.backend.repository.TradeRepository;
+import com.example.backend.service.TradeService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -12,37 +12,30 @@ import java.util.List;
 public class TradeController {
 
     @Autowired
-    private TradeRepository tradeRepository;
+    private TradeService tradeService;
 
     @GetMapping
     public List<Trade> getAllTrades() {
-        return tradeRepository.findAll();
+        return tradeService.getAllTrades();
     }
 
     @GetMapping("/{id}")
     public Trade getTradeById(@PathVariable int id) {
-        return tradeRepository.findById(id).orElse(null);
+        return tradeService.getTradeById(id);
     }
 
     @PostMapping
     public Trade createTrade(@RequestBody Trade trade) {
-        return tradeRepository.save(trade);
+        return tradeService.createTrade(trade);
     }
 
     @PutMapping("/{id}")
     public Trade updateTrade(@PathVariable int id, @RequestBody Trade tradeDetails) {
-        Trade trade = tradeRepository.findById(id).orElse(null);
-        if (trade != null) {
-            trade.setInitiatingUserId(tradeDetails.getInitiatingUserId());
-            trade.setReceivingUserId(tradeDetails.getReceivingUserId());
-            trade.setStatus(tradeDetails.getStatus());
-            return tradeRepository.save(trade);
-        }
-        return null;
+        return tradeService.updateTrade(id, tradeDetails);
     }
 
     @DeleteMapping("/{id}")
     public void deleteTrade(@PathVariable int id) {
-        tradeRepository.deleteById(id);
+        tradeService.deleteTrade(id);
     }
 }

@@ -1,7 +1,7 @@
 package com.example.backend.controller;
 
 import com.example.backend.model.Pokemon;
-import com.example.backend.repository.PokemonRepository;
+import com.example.backend.service.PokemonService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -12,40 +12,30 @@ import java.util.List;
 public class PokemonController {
 
     @Autowired
-    private PokemonRepository pokemonRepository;
+    private PokemonService pokemonService;
 
     @GetMapping
     public List<Pokemon> getAllPokemons() {
-        return pokemonRepository.findAll();
+        return pokemonService.getAllPokemons();
     }
 
     @GetMapping("/{id}")
     public Pokemon getPokemonById(@PathVariable int id) {
-        return pokemonRepository.findById(id).orElse(null);
+        return pokemonService.getPokemonById(id);
     }
 
     @PostMapping
     public Pokemon createPokemon(@RequestBody Pokemon pokemon) {
-        return pokemonRepository.save(pokemon);
+        return pokemonService.createPokemon(pokemon);
     }
 
     @PutMapping("/{id}")
     public Pokemon updatePokemon(@PathVariable int id, @RequestBody Pokemon pokemonDetails) {
-        Pokemon pokemon = pokemonRepository.findById(id).orElse(null);
-        if (pokemon != null) {
-            pokemon.setName(pokemonDetails.getName());
-            pokemon.setType(pokemonDetails.getType());
-            pokemon.setLevel(pokemonDetails.getLevel());
-            pokemon.setMove(pokemonDetails.getMove());
-            pokemon.setFlavorText(pokemonDetails.getFlavorText());
-            pokemon.setEvolutions(pokemonDetails.getEvolutions());
-            return pokemonRepository.save(pokemon);
-        }
-        return null;
+        return pokemonService.updatePokemon(id, pokemonDetails);
     }
 
     @DeleteMapping("/{id}")
     public void deletePokemon(@PathVariable int id) {
-        pokemonRepository.deleteById(id);
+        pokemonService.deletePokemon(id);
     }
 }

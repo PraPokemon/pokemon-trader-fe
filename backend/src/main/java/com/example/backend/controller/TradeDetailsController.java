@@ -1,7 +1,7 @@
 package com.example.backend.controller;
 
 import com.example.backend.model.TradeDetails;
-import com.example.backend.repository.TradeDetailsRepository;
+import com.example.backend.service.TradeDetailsService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -12,42 +12,35 @@ import java.util.List;
 public class TradeDetailsController {
 
     @Autowired
-    private TradeDetailsRepository tradeDetailsRepository;
+    private TradeDetailsService tradeDetailsService;
 
     @GetMapping
     public List<TradeDetails> getAllTradeDetails() {
-        return tradeDetailsRepository.findAll();
+        return tradeDetailsService.getAllTradeDetails();
     }
 
     @GetMapping("/{id}")
     public TradeDetails getTradeDetailsById(@PathVariable int id) {
-        return tradeDetailsRepository.findById(id).orElse(null);
+        return tradeDetailsService.getTradeDetailsById(id);
     }
 
     @GetMapping("/trade/{tradeId}")
     public List<TradeDetails> getTradeDetailsByTradeId(@PathVariable int tradeId) {
-        return tradeDetailsRepository.findByTradeId(tradeId);
+        return tradeDetailsService.getTradeDetailsByTradeId(tradeId);
     }
 
     @PostMapping
     public TradeDetails createTradeDetails(@RequestBody TradeDetails tradeDetails) {
-        return tradeDetailsRepository.save(tradeDetails);
+        return tradeDetailsService.createTradeDetails(tradeDetails);
     }
 
     @PutMapping("/{id}")
     public TradeDetails updateTradeDetails(@PathVariable int id, @RequestBody TradeDetails tradeDetailsDetails) {
-        TradeDetails tradeDetails = tradeDetailsRepository.findById(id).orElse(null);
-        if (tradeDetails != null) {
-            tradeDetails.setTradeId(tradeDetailsDetails.getTradeId());
-            tradeDetails.setUserPokemonId(tradeDetailsDetails.getUserPokemonId());
-            tradeDetails.setDirection(tradeDetailsDetails.getDirection());
-            return tradeDetailsRepository.save(tradeDetails);
-        }
-        return null;
+        return tradeDetailsService.updateTradeDetails(id, tradeDetailsDetails);
     }
 
     @DeleteMapping("/{id}")
     public void deleteTradeDetails(@PathVariable int id) {
-        tradeDetailsRepository.deleteById(id);
+        tradeDetailsService.deleteTradeDetails(id);
     }
 }
