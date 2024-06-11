@@ -6,7 +6,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.AllArgsConstructor;
 
-@Document(collection = "trade")
+@Document(collection = "trades")
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
