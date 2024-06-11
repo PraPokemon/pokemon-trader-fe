@@ -29,9 +29,9 @@ public class PokemonService {
         Pokemon pokemon = pokemonRepository.findById(id).orElse(null);
         if (pokemon != null) {
             pokemon.setName(pokemonDetails.getName());
-            pokemon.setType(pokemonDetails.getType());
-            pokemon.setLevel(pokemonDetails.getLevel());
-            pokemon.setMove(pokemonDetails.getMove());
+            pokemon.setTypes(pokemonDetails.getTypes());
+            pokemon.setBaseExperience(pokemonDetails.getBaseExperience());
+            pokemon.setMoves(pokemonDetails.getMoves());
             pokemon.setFlavorText(pokemonDetails.getFlavorText());
             pokemon.setEvolutions(pokemonDetails.getEvolutions());
             return pokemonRepository.save(pokemon);

@@ -6,17 +6,33 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.AllArgsConstructor;
 
-@Document(collection = "pokemons")
+import java.util.List;
+
+@Document(collection = "pokemon")
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
 public class Pokemon {
     @Id
-    private int pokemonId;
+    private int id;
     private String name;
-    private String type;
-    private int level;
-    private String move;
+    private List<Type> types;
+    private int baseExperience;
+    private List<Move> moves;
     private String flavorText;
     private String evolutions;
+
+    @Data
+    @NoArgsConstructor
+    @AllArgsConstructor
+    public static class Type {
+        private String name;
+    }
+
+    @Data
+    @NoArgsConstructor
+    @AllArgsConstructor
+    public static class Move {
+        private String name;
+    }
 }
