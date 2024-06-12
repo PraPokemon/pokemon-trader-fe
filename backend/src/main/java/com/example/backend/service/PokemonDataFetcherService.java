@@ -30,11 +30,13 @@ public class PokemonDataFetcherService {
         PokemonApiResponse response = restTemplate.getForObject(url, PokemonApiResponse.class);
 
         if (response != null) {
-            List<Pokemon.Type> types = response.getTypes().stream()
+            List<Pokemon.Type> types = response.getTypes()
+            		.stream()
                     .map(typeInfo -> new Pokemon.Type(typeInfo.getType().getName()))
                     .collect(Collectors.toList());
 
-            List<Pokemon.Move> moves = response.getMoves().stream()
+            List<Pokemon.Move> moves = response.getMoves()
+            		.stream()
                     .map(moveInfo -> new Pokemon.Move(moveInfo.getMove().getName()))
                     .collect(Collectors.toList());
 

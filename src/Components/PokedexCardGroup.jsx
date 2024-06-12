@@ -6,7 +6,7 @@ import Button from "react-bootstrap/Button";
 function PokedexCardGroup() {
   const [pokeData, setPokeData] = useState([]);
   const [loading, setLoading] = useState(true);
-  const [url, setUrl] = useState("https://pokeapi.co/api/v2/pokemon/");
+  const [url, setUrl] = useState("/pokemons");
   const [NextUrl, setNextUrl] = useState();
   const [PreviousUrl, setPreviousUrl] = useState();
 
