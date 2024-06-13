@@ -3,9 +3,9 @@ package com.example.backend.service;
 import com.example.backend.model.Pokemon;
 import com.example.backend.repository.PokemonRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
-
-import java.util.List;
 
 @Service
 public class PokemonService {
@@ -13,10 +13,9 @@ public class PokemonService {
     @Autowired
     private PokemonRepository pokemonRepository;
 
-    public List<Pokemon> getAllPokemons() {
-        return pokemonRepository.findAll();
+    public Page<Pokemon> getAllPokemons(int page, int size) {
+        return pokemonRepository.findAll(PageRequest.of(page, size));
     }
-
     public Pokemon getPokemonById(int id) {
         return pokemonRepository.findById(id).orElse(null);
     }

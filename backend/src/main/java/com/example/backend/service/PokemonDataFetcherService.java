@@ -5,6 +5,7 @@ import lombok.Data;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -15,6 +16,7 @@ public class PokemonDataFetcherService {
     private static final String POKEAPI_URL = "https://pokeapi.co/api/v2/pokemon/";
     private static final String POKEAPI_SPECIES_URL = "https://pokeapi.co/api/v2/pokemon-species/";
     private static final String POKEAPI_POKEMON_COUNT_URL = "https://pokeapi.co/api/v2/pokemon?limit=1";
+    private static final String POKEAPI_EVOLUTION_CHAIN_URL = "https://pokeapi.co/api/v2/evolution-chain/";
 
     public PokemonDataFetcherService() {
         this.restTemplate = new RestTemplate();
@@ -31,12 +33,12 @@ public class PokemonDataFetcherService {
 
         if (response != null) {
             List<Pokemon.Type> types = response.getTypes()
-            		.stream()
+                    .stream()
                     .map(typeInfo -> new Pokemon.Type(typeInfo.getType().getName()))
                     .collect(Collectors.toList());
 
             List<Pokemon.Move> moves = response.getMoves()
-            		.stream()
+                    .stream()
                     .map(moveInfo -> new Pokemon.Move(moveInfo.getMove().getName()))
                     .collect(Collectors.toList());
 
@@ -44,12 +46,20 @@ public class PokemonDataFetcherService {
             String speciesUrl = POKEAPI_SPECIES_URL + id;
             SpeciesApiResponse speciesResponse = restTemplate.getForObject(speciesUrl, SpeciesApiResponse.class);
             String flavorText = null;
-            if (speciesResponse != null && speciesResponse.getFlavor_text_entries() != null) {
-                for (SpeciesApiResponse.FlavorTextEntry entry : speciesResponse.getFlavor_text_entries()) {
-                    if ("en".equals(entry.getLanguage().getName())) {
-                        flavorText = entry.getFlavor_text();
-                        break;
+            List<String> evolutions = null;
+            if (speciesResponse != null) {
+                if (speciesResponse.getFlavor_text_entries() != null) {
+                    for (SpeciesApiResponse.FlavorTextEntry entry : speciesResponse.getFlavor_text_entries()) {
+                        if ("en".equals(entry.getLanguage().getName())) {
+                            flavorText = entry.getFlavor_text();
+                            break;
+                        }
                     }
+                }
+
+                // Fetch evolution data
+                if (speciesResponse.getEvolution_chain() != null && speciesResponse.getEvolution_chain().getUrl() != null) {
+                    evolutions = fetchEvolutions(speciesResponse.getEvolution_chain().getUrl());
                 }
             }
 
@@ -60,10 +70,29 @@ public class PokemonDataFetcherService {
                     response.getBaseExperience(),
                     moves,
                     flavorText,
-                    null // Placeholder for evolutions, this would need additional API calls
+                    evolutions
             );
         }
         return null;
+    }
+
+    private List<String> fetchEvolutions(String url) {
+        EvolutionChainResponse response = restTemplate.getForObject(url, EvolutionChainResponse.class);
+        List<String> evolutions = new ArrayList<>();
+        if (response != null && response.getChain() != null) {
+            addEvolutions(response.getChain(), evolutions);
+        }
+        return evolutions;
+    }
+
+    private void addEvolutions(EvolutionChainResponse.EvolutionChainNode node, List<String> evolutions) {
+        if (node == null) {
+            return;
+        }
+        evolutions.add(node.getSpecies().getName());
+        for (EvolutionChainResponse.EvolutionChainNode nextNode : node.getEvolves_to()) {
+            addEvolutions(nextNode, evolutions);
+        }
     }
 
     @Data
@@ -103,6 +132,7 @@ public class PokemonDataFetcherService {
     @Data
     private static class SpeciesApiResponse {
         private List<FlavorTextEntry> flavor_text_entries;
+        private EvolutionChain evolution_chain;
 
         @Data
         private static class FlavorTextEntry {
@@ -113,9 +143,25 @@ public class PokemonDataFetcherService {
             private static class Language {
                 private String name;
             }
+        }
+
+        @Data
+        private static class EvolutionChain {
+            private String url;
+        }
+    }
+
+    @Data
+    private static class EvolutionChainResponse {
+        private EvolutionChainNode chain;
+
+        @Data
+        private static class EvolutionChainNode {
+            private Species species;
+            private List<EvolutionChainNode> evolves_to;
 
             @Data
-            private static class Version {
+            private static class Species {
                 private String name;
             }
         }

@@ -1,68 +1,55 @@
 import Card from "./Card";
-import { useState } from "react";
-import { useEffect } from "react";
-import axios from "axios";
+import { useState, useEffect } from "react";
+import axios from "../api/axiosConfig";
 import Button from "react-bootstrap/Button";
+
 function PokedexCardGroup() {
   const [pokeData, setPokeData] = useState([]);
   const [loading, setLoading] = useState(true);
-  const [url, setUrl] = useState("/pokemons");
-  const [NextUrl, setNextUrl] = useState();
-  const [PreviousUrl, setPreviousUrl] = useState();
+  const [page, setPage] = useState(0);
+  const [pageSize, setPageSize] = useState(20);
+  const [totalPages, setTotalPages] = useState(0);
 
-  const pokeFunc = async () => {
+  const fetchPokemons = async (page) => {
     setLoading(true);
-    const results = await axios.get(url);
-    setNextUrl(results.data.next);
-    setPreviousUrl(results.data.previous);
-    await getPokemon(results.data.results);
+    try {
+      const result = await axios.get(`/pokemons?page=${page}&size=${pageSize}`);
+      setPokeData(result.data.results);
+      setTotalPages(result.data.totalPages);
+    } catch (error) {
+      console.error("Error fetching data: ", error);
+    }
     setLoading(false);
   };
 
-  const getPokemon = async (results) => {
-    const promises = results.map(async (item) => {
-      const result = await axios.get(item.url);
-      return result.data;
-    });
-    const resolvedResults = await Promise.all(promises);
-    setPokeData(resolvedResults);
-  };
-
   useEffect(() => {
-    pokeFunc();
-  }, [url]);
+    fetchPokemons(page);
+  }, [page]);
 
   return (
-    <>
-      <div>
-        <Card pokemon={pokeData} loading={loading} />
-        <div className="PokedexCardButons">
-          <Button
-            variant="success"
-            style={{ margin: "5px" }}
-            onClick={() => {
-              setPokeData([]);
-              setUrl(PreviousUrl);
-            }}
-            type="button"
-          >
-            Previous
-          </Button>{" "}
-          <Button
-            variant="success"
-            style={{ margin: "5px" }}
-            onClick={() => {
-              setPokeData([]);
-              setUrl(NextUrl);
-            }}
-            type="button"
-          >
-            Next
-          </Button>{" "}
-        </div>
+    <div>
+      <Card pokemon={pokeData} loading={loading} />
+      <div className="PokedexCardButtons">
+        <Button
+          variant="success"
+          style={{ margin: "5px" }}
+          onClick={() => setPage((prev) => Math.max(prev - 1, 0))}
+          disabled={page === 0}
+        >
+          Previous
+        </Button>{" "}
+        <Button
+          variant="success"
+          style={{ margin: "5px" }}
+          onClick={() => setPage((prev) => Math.min(prev + 1, totalPages - 1))}
+          disabled={page === totalPages - 1}
+        >
+          Next
+        </Button>{" "}
       </div>
-    </>
+    </div>
   );
 }
 
 export default PokedexCardGroup;
+

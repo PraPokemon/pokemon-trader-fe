@@ -20,7 +20,7 @@ public class Pokemon {
     private int baseExperience;
     private List<Move> moves;
     private String flavorText;
-    private String evolutions;
+    private List<String> evolutions;
 
     @Data
     @NoArgsConstructor

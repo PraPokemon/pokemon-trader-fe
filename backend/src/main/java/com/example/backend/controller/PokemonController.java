@@ -3,9 +3,11 @@ package com.example.backend.controller;
 import com.example.backend.model.Pokemon;
 import com.example.backend.service.PokemonService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.List;
+import java.util.HashMap;
+import java.util.Map;
 
 @RestController
 @RequestMapping("/pokemons")
@@ -15,8 +17,13 @@ public class PokemonController {
     private PokemonService pokemonService;
 
     @GetMapping
-    public List<Pokemon> getAllPokemons() {
-        return pokemonService.getAllPokemons();
+    public Map<String, Object> getAllPokemons(@RequestParam(defaultValue = "0") int page, @RequestParam(defaultValue = "20") int size) {
+        Page<Pokemon> pageResult = pokemonService.getAllPokemons(page, size);
+        Map<String, Object> response = new HashMap<>();
+        response.put("results", pageResult.getContent());
+        response.put("totalPages", pageResult.getTotalPages());
+        response.put("currentPage", pageResult.getNumber());
+        return response;
     }
 
     @GetMapping("/{id}")
