@@ -2,17 +2,22 @@ import React, { useState } from 'react';
 import Modal from 'react-bootstrap/Modal';
 import Button from 'react-bootstrap/Button';
 import { Link } from "react-router-dom";
-import PokemonDropdown from './PokemonDropdown';
 import SetLevel from './SetLevel';
-import SearchableDropdown from './PokemonSearchDropdown';
+import PokemonSearchDropdown from './PokemonSearchDropdown';
 
 const InventoryTradeModal = ({show, onHide, image, pokemonList}) => { //pokemonlist valjda api
 
-    const [selectedItem, setSelectedItem] = useState('Select Pokemon');
+    const [selectedPokemon, setSelectedPokemon] = useState(null);
 
-    const handleItemClick = (event) => {
-        setSelectedItem(event.target.textContent.trim()); 
-    }
+    const handlePokemonSelect = (pokemon) => {
+        setSelectedPokemon(pokemon);
+    };
+
+    const handleTrade = () => {
+        // lukas trade logika xd
+        console.log(`Trading ${selectedPokemon}`);
+        onHide();
+    };
 
     return (
         <Modal show={show} onHide={onHide} size="lg">
@@ -21,12 +26,11 @@ const InventoryTradeModal = ({show, onHide, image, pokemonList}) => { //pokemonl
             </Modal.Header>
             <Modal.Body>
                 <h5>Chose Pokemon: </h5>
-                <PokemonDropdown selectedItem={selectedItem} handleItemClick={handleItemClick}/>
+                <PokemonSearchDropdown options={pokemonList} onSelect={handlePokemonSelect}/>
                 <br />
                 <h5>LVL: </h5>
                 <SetLevel />
-            </Modal.Body>
-            <Modal.Footer>
+            </Modal.Body><Modal.Footer>
                 <Button variant="secondary" onClick={onHide}>
                     Cancel
                 </Button>

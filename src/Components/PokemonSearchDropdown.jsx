@@ -4,9 +4,10 @@ import DropdownButton from 'react-bootstrap/DropdownButton';
 import FormControl from 'react-bootstrap/FormControl';
 import InputGroup from 'react-bootstrap/InputGroup';
 
-const SearchableDropdown = ({ options, onSelect }) => {
+const PokemonSearchDropdown = ({ options, onSelect }) => {
     const [searchTerm, setSearchTerm] = useState('');
     const [filteredOptions, setFilteredOptions] = useState(options);
+    const [selectedPokemon, setSelectedPokemon] = useState(null);
 
     const handleSearchChange = (e) => {
         const searchValue = e.target.value.toLowerCase();
@@ -18,18 +19,18 @@ const SearchableDropdown = ({ options, onSelect }) => {
     };
 
     const handleItemClick = (option) => {
+        setSelectedPokemon(option);
         onSelect(option);
         setSearchTerm('');
     };
 
     return (
-        <DropdownButton id="dropdown-item-button" title="Select Pokemon" className="mt-3">
+        <DropdownButton id="dropdown-item-button" title={selectedPokemon || 'Select Pokemon'} className="mt-3">
             <InputGroup>
                 <FormControl
                     placeholder="Search..."
                     value={searchTerm}
-                    onChange={handleSearchChange}
-                />
+                    onChange={handleSearchChange}/>
             </InputGroup>
             <Dropdown.Divider />
             {filteredOptions.map((option, index) => (
@@ -44,5 +45,4 @@ const SearchableDropdown = ({ options, onSelect }) => {
         </DropdownButton>
     );
 };
-//xddddddddddddddddd
-export default SearchableDropdown;
+export default PokemonSearchDropdown;

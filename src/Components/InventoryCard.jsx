@@ -12,6 +12,8 @@ const InventoryCard = () => {
     const [selectedImage, setSelectedImage] = useState(null);
     const [isTradeModalOpen, setIsTradeModalOpen] = useState(false);
 
+    const pokemonList = ['Pikachu', 'Raichu', 'Bulbasaur', 'Charmander', 'Squirtle'];
+
     const cardClick = (image) => {
         console.log('Pokemon clicked: $(image)');
         setSelectedImage(image);
@@ -52,6 +54,7 @@ const InventoryCard = () => {
         show={isTradeModalOpen}
         onHide={closeTradeModal}
         image={selectedImage}
+        pokemonList={pokemonList}
         />
     </div>
   );
