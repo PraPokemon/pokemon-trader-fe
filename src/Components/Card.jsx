@@ -37,8 +37,8 @@ function Card({ pokemon, loading }) {
                 ))}
               </div>
               <div className="PokemonIcon">
-                <img src={item.sprites?.front_default} alt={item.name} />
-              </div>
+                <img src={item.sprites.front_default} alt={item.id} />
+                </div>
             </button>
             {expansionStates[item.id] && (
               <div className="ContainerButon" onClick={handleExpandedContentClick}>
