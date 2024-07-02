@@ -11,5 +11,5 @@ const PokemonDropdown = ({ selectedItem, handleItemClick }) => {
         </DropdownButton>
     );
 };
-//lol
+
 export default PokemonDropdown;
