@@ -3,12 +3,14 @@ import Card from 'react-bootstrap/Card';
 import Col from 'react-bootstrap/Col';
 import Row from 'react-bootstrap/Row';
 import InventoryModal from './InventoryModal';
+import InventoryTradeModal from './InventoryTradeModal';
 
-const images = ['https://cdn0.iconfinder.com/data/icons/pokemon-go-vol-2/135/_pikachu-128.png', 'https://cdn0.iconfinder.com/data/icons/pokemon-go-vol-2/135/_pikachu-128.png', 'https://cdn0.iconfinder.com/data/icons/pokemon-go-vol-2/135/_pikachu-128.png', 'https://cdn0.iconfinder.com/data/icons/pokemon-go-vol-2/135/_pikachu-128.png', 'https://cdn0.iconfinder.com/data/icons/pokemon-go-vol-2/135/_pikachu-128.png', 'https://cdn0.iconfinder.com/data/icons/pokemon-go-vol-2/135/_pikachu-128.png', 'https://cdn0.iconfinder.com/data/icons/pokemon-go-vol-2/135/_pikachu-128.png', 'https://cdn0.iconfinder.com/data/icons/pokemon-go-vol-2/135/_pikachu-128.png' ];
+const images = ['https://cdn0.iconfinder.com/data/icons/pokemon-go-vol-2/135/_pikachu-128.png', 'https://cdn0.iconfinder.com/data/icons/pokemon-go-vol-2/135/_pikachu-128.png', 'https://cdn0.iconfinder.com/data/icons/pokemon-go-vol-2/135/_pikachu-128.png', 'https://cdn0.iconfinder.com/data/icons/pokemon-go-vol-2/135/_pikachu-128.png', 'https://cdn0.iconfinder.com/data/icons/pokemon-go-vol-2/135/_pikachu-128.png', 'https://cdn0.iconfinder.com/data/icons/pokemon-go-vol-2/135/_pikachu-128.png', 'https://cdn0.iconfinder.com/data/icons/pokemon-go-vol-2/135/_pikachu-128.png', 'https://cdn0.iconfinder.com/data/icons/pokemon-go-vol-2/135/_pikachu-128.png', 'https://cdn0.iconfinder.com/data/icons/pokemon-go-vol-2/135/_pikachu-128.png', 'https://cdn0.iconfinder.com/data/icons/pokemon-go-vol-2/135/_pikachu-128.png'];
 
 const InventoryCard = () => {
     const [isModalOpen, setIsModalOpen] = useState(false);
     const [selectedImage, setSelectedImage] = useState(null);
+    const [isTradeModalOpen, setIsTradeModalOpen] = useState(false);
 
     const cardClick = (image) => {
         console.log('Pokemon clicked: $(image)');
@@ -18,6 +20,15 @@ const InventoryCard = () => {
 
     const closeModal = () => {
         setIsModalOpen(false);
+    };
+
+    const openTradeModal = () => {
+        setIsModalOpen(false);
+        setIsTradeModalOpen(true);
+    };
+
+    const closeTradeModal = () => {
+        setIsTradeModalOpen(false);
     };
 
   return (
@@ -34,6 +45,12 @@ const InventoryCard = () => {
         <InventoryModal
         show={isModalOpen}
         onHide={closeModal}
+        image={selectedImage}
+        onTrade={openTradeModal}
+        />
+        <InventoryTradeModal
+        show={isTradeModalOpen}
+        onHide={closeTradeModal}
         image={selectedImage}
         />
     </div>

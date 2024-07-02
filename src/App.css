@@ -139,3 +139,42 @@
   justify-content: center;
   flex-wrap: wrap;
 }
+
+.PositionRelative {
+  position: relative;
+}
+
+.ArrowRight {
+  position: absolute;
+  top: 50%;
+  right: -10%;
+  transform: translateY(-50%);
+  width: 70px;
+  height: 2px;
+  background-color: black;
+}
+
+.ArrowRight::before {
+
+  content: '';
+  position: absolute;
+  top: 50%;
+  right: 0;
+  transform: translateY(-50%);
+  width: 0;
+  height: 0;
+  border-top: 10px solid transparent;
+  border-bottom: 10px solid transparent;
+  border-left: 10px solid black;
+}
+
+.ArrowRight::after {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 0;
+  transform: translateY(-50%);
+  width: 20px;
+  height: 2px;
+  background-color: black;
+}
