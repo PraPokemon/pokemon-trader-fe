@@ -45,44 +45,37 @@ public class PokemonDataFetcherService {
             // Fetch flavor text from species endpoint
             String speciesUrl = POKEAPI_SPECIES_URL + id;
             SpeciesApiResponse speciesResponse = restTemplate.getForObject(speciesUrl, SpeciesApiResponse.class);
-            String flavorText = null;
-            List<String> evolutions = null;
-            if (speciesResponse != null) {
-                if (speciesResponse.getFlavor_text_entries() != null) {
-                    for (SpeciesApiResponse.FlavorTextEntry entry : speciesResponse.getFlavor_text_entries()) {
-                        if ("en".equals(entry.getLanguage().getName())) {
-                            flavorText = entry.getFlavor_text();
-                            break;
-                        }
-                    }
-                }
+            String flavorText = "";
+            if (speciesResponse != null && speciesResponse.getFlavor_text_entries() != null) {
+                flavorText = speciesResponse.getFlavor_text_entries()
+                        .stream()
+                        .filter(entry -> "en".equals(entry.getLanguage().getName()))
+                        .findFirst()
+                        .map(SpeciesApiResponse.FlavorTextEntry::getFlavor_text)
+                        .orElse("");
+            }
 
-                // Fetch evolution data
-                if (speciesResponse.getEvolution_chain() != null && speciesResponse.getEvolution_chain().getUrl() != null) {
-                    evolutions = fetchEvolutions(speciesResponse.getEvolution_chain().getUrl());
+            // Fetch evolution chain
+            List<String> evolutions = new ArrayList<>();
+            if (speciesResponse != null && speciesResponse.getEvolution_chain() != null) {
+                String evolutionChainUrl = speciesResponse.getEvolution_chain().getUrl();
+                EvolutionChainResponse evolutionChainResponse = restTemplate.getForObject(evolutionChainUrl, EvolutionChainResponse.class);
+                if (evolutionChainResponse != null && evolutionChainResponse.getChain() != null) {
+                    addEvolutions(evolutionChainResponse.getChain(), evolutions);
                 }
             }
 
-            return new Pokemon(
-                    response.getId(),
-                    response.getName(),
-                    types,
-                    response.getBaseExperience(),
-                    moves,
-                    flavorText,
-                    evolutions
-            );
+            Pokemon pokemon = new Pokemon();
+            pokemon.setId(response.getId());
+            pokemon.setName(response.getName());
+            pokemon.setTypes(types);
+            pokemon.setMoves(moves);
+            pokemon.setFlavorText(flavorText);
+            pokemon.setEvolutions(evolutions);
+
+            return pokemon;
         }
         return null;
-    }
-
-    private List<String> fetchEvolutions(String url) {
-        EvolutionChainResponse response = restTemplate.getForObject(url, EvolutionChainResponse.class);
-        List<String> evolutions = new ArrayList<>();
-        if (response != null && response.getChain() != null) {
-            addEvolutions(response.getChain(), evolutions);
-        }
-        return evolutions;
     }
 
     private void addEvolutions(EvolutionChainResponse.EvolutionChainNode node, List<String> evolutions) {
@@ -104,7 +97,6 @@ public class PokemonDataFetcherService {
     private static class PokemonApiResponse {
         private int id;
         private String name;
-        private int baseExperience;
         private List<TypeInfo> types;
         private List<MoveInfo> moves;
 

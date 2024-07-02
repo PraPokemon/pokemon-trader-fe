@@ -1,19 +1,30 @@
-import Card from "./Card";
-import { useState, useEffect } from "react";
+import React, { useState, useEffect } from "react";
 import axios from "../api/axiosConfig";
 import Button from "react-bootstrap/Button";
+import PokemonFilterSearch from "./PokemonFilterSerch";
+import LevelFilter from "./FilterLvL";
+import Card from "./Card";
 
 function PokedexCardGroup() {
   const [pokeData, setPokeData] = useState([]);
   const [loading, setLoading] = useState(true);
+  const [searchTerm, setSearchTerm] = useState("");
+  const [levelRange, setLevelRange] = useState([0, 100]);
   const [page, setPage] = useState(0);
-  const [pageSize, setPageSize] = useState(20);
   const [totalPages, setTotalPages] = useState(0);
 
-  const fetchPokemons = async (page) => {
+  const fetchPokemons = async () => {
     setLoading(true);
     try {
-      const result = await axios.get(`/pokemons?page=${page}&size=${pageSize}`);
+      const result = await axios.get(`/pokemons`, {
+        params: {
+          page: page,
+          size: 20,
+          name: searchTerm,
+          minLevel: levelRange[0],
+          maxLevel: levelRange[1]
+        }
+      });
       setPokeData(result.data.results);
       setTotalPages(result.data.totalPages);
     } catch (error) {
@@ -23,11 +34,15 @@ function PokedexCardGroup() {
   };
 
   useEffect(() => {
-    fetchPokemons(page);
-  }, [page]);
+    fetchPokemons();
+  }, [searchTerm, levelRange, page]);
 
   return (
     <div>
+      <div className="filter-container">
+        <PokemonFilterSearch setSearchTerm={setSearchTerm} />
+        <LevelFilter setLevelRange={setLevelRange} />
+      </div>
       <Card pokemon={pokeData} loading={loading} />
       <div className="PokedexCardButtons">
         <Button
@@ -52,4 +67,3 @@ function PokedexCardGroup() {
 }
 
 export default PokedexCardGroup;
-
