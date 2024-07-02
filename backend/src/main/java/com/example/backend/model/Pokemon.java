@@ -17,7 +17,6 @@ public class Pokemon {
     private int id;
     private String name;
     private List<Type> types;
-    private int baseExperience;
     private List<Move> moves;
     private String flavorText;
     private List<String> evolutions;

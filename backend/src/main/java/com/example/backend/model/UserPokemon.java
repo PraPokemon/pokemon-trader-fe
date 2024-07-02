@@ -1,5 +1,7 @@
 package com.example.backend.model;
 
+import java.util.List;
+
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 import lombok.Data;
@@ -15,4 +17,8 @@ public class UserPokemon {
     private int userPokemonId;
     private int userId;
     private int pokemonId;
+    private int level;
+    private List<Pokemon.Type> types;
+    private List<Pokemon.Move> moves;
+    private String item;
 }

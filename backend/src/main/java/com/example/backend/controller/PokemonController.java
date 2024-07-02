@@ -7,6 +7,7 @@ import org.springframework.data.domain.Page;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 @RestController
@@ -17,8 +18,14 @@ public class PokemonController {
     private PokemonService pokemonService;
 
     @GetMapping
-    public Map<String, Object> getAllPokemons(@RequestParam(defaultValue = "0") int page, @RequestParam(defaultValue = "20") int size) {
-        Page<Pokemon> pageResult = pokemonService.getAllPokemons(page, size);
+    public Map<String, Object> getAllPokemons(
+        @RequestParam(defaultValue = "0") int page,
+        @RequestParam(defaultValue = "20") int size,
+        @RequestParam(value = "name", required = false) String name,
+        @RequestParam(value = "minLevel", required = false, defaultValue = "0") int minLevel,
+        @RequestParam(value = "maxLevel", required = false, defaultValue = "100") int maxLevel
+    ) {
+        Page<Pokemon> pageResult = pokemonService.getFilteredPokemons(page, size, name);
         Map<String, Object> response = new HashMap<>();
         response.put("results", pageResult.getContent());
         response.put("totalPages", pageResult.getTotalPages());
