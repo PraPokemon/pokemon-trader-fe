@@ -125,3 +125,17 @@
 .ProfileButon{
   justify-content:end;
 }
+
+.InventoryCard {
+  border-end-end-radius: 1rem;
+  border-top-left-radius: 1rem;
+  background-color: #FDE74C;
+  margin: 30px;
+  padding: 15px;
+  border-top: 10px solid #5BC0EB;
+  border-left: 10px solid #5BC0EB;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-wrap: wrap;
+}
