@@ -3,7 +3,7 @@ import Button from "react-bootstrap/Button";
 import Modal from "react-bootstrap/Modal";
 import Form from "react-bootstrap/Form";
 
-function addToInventoryButton({ pokemon }) {
+function addToInventoryButton({ pokemon , children  }) {
   const [show, setShow] = useState(false);
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
@@ -16,18 +16,17 @@ function addToInventoryButton({ pokemon }) {
   // Function to map moves to option elements
   const renderMoveOptions = (moves) => {
     return moves.map((move, index) => (
-      <option key={index} value={move.move.url}>
-        {move.move.name}
+      <option key={index} value={move.move}>
+        {move.move}
       </option>
     ));
   };
 
   return (
     <>
-      <Button className="ButonBasic" variant="primary" onClick={handleShow}>
-        Add to inventory
-      </Button>
-
+      <div onClick={handleShow} className="ContainerButon" style={{ cursor: 'pointer' }}>
+        {children}
+      </div>
       <Modal show={show} onHide={handleClose}>
         <Modal.Header closeButton>
           <Modal.Title>Add Pokemon</Modal.Title>

@@ -1,16 +1,17 @@
+import { useState } from "react";
 import { Link } from "react-router-dom";
 import Container from "react-bootstrap/Container";
 import Nav from "react-bootstrap/Nav";
 import Navbar from "react-bootstrap/Navbar";
 
 function NavbarPokemon() {
+  const [Username, setUsername] = useState("User not found");
   return (
     <>
       
       <Navbar
         expand="lg"
         className="PokemonNavbar "
-        bg="primary" data-bs-theme="dark"
       >
         <Container>
           <Navbar.Brand as={Link} to="/">Poketrader</Navbar.Brand>
@@ -21,7 +22,7 @@ function NavbarPokemon() {
               <Nav.Link as={Link} to="/Inventory">Inventory</Nav.Link>
             </Nav>
             <Navbar.Text className="ms-auto text-yellow">
-              Signed in as: <a href="#login">Lord-Helix</a>
+              Signed in as: <a href="#login">{Username}</a>
             </Navbar.Text>
           </Navbar.Collapse>
         </Container>

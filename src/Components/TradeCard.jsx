@@ -16,7 +16,7 @@ function TradeCard({ pokemon, loading }) {
         pokemon.map((item) => {
           return (
             <div className="Container" key={item.id}>
-              <button
+              <Button
                 className="ContainerButon"
                 onClick={() => setModalShow(true)}
               >
@@ -30,7 +30,7 @@ function TradeCard({ pokemon, loading }) {
                 <div className="PokemonIcon">
                   <img src={item.sprites.front_default} alt={item.id} />
                 </div>
-              </button>
+              </Button>
 
               <TradeOfferModal
                 show={modalShow}
