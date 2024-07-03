@@ -8,6 +8,7 @@ import com.example.backend.service.ItemsService;
 import com.example.backend.model.Items;
 
 import java.util.List;
+import java.util.Optional;
 
 
 @RestController
@@ -19,5 +20,9 @@ public class ItemsController {
 	@GetMapping
 	public List<Items> getAllItems(){
 		return itemsService.getAllItems();
+	}
+	@GetMapping("/{id}")
+	public Optional<Items> getItemById(int id){
+		return itemsService.findById(id);
 	}
 }

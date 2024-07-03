@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class UserPokemonService {
@@ -37,5 +38,13 @@ public class UserPokemonService {
 
     public void deleteUserPokemon(int id) {
         userPokemonRepository.deleteById(id);
+    }
+    public String getPokemonItemName(int userPokemonId) {
+        Optional<UserPokemon> userPokemonOpt = userPokemonRepository.findById(userPokemonId);
+        if (userPokemonOpt.isPresent()) {
+            UserPokemon userPokemon = userPokemonOpt.get();
+            return userPokemon.getItem() != null ? userPokemon.getItem().getName() : null;
+        }
+        return null;
     }
 }
