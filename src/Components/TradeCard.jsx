@@ -28,7 +28,7 @@ function TradeCard({ pokemon, loading }) {
             <div
               className="Container"
               key={item.id}
-              onClick={() => handleExpandClick(item.id)}
+              // onClick={() => handleExpandClick(item.id)}
             >
               <button className="ContainerButon">
                 <h1>{item.id}</h1>
@@ -43,29 +43,6 @@ function TradeCard({ pokemon, loading }) {
                 </div>
                 
               </button>
-
-              {expansionStates[item.id] && (
-                <div
-                  className="ContainerButon"
-                  onClick={handleExpandedContentClick}
-                >
-                  <div className="TypesPokedex">
-                    <h4>Abilities: </h4>
-                    {item.abilities.map((abilities) => (
-                      <h5>{abilities.ability.name}</h5>
-                    ))}
-                  </div>
-                  <div>
-                    <h4>height: </h4>
-                    <h4>{item.height} ft</h4>
-                  </div>
-                  <div>
-                    <h4>Weight: </h4>
-                    <h4>{item.weight} lb</h4>
-                  </div>
-                  
-                </div>
-              )}
             </div>
           );
         })
