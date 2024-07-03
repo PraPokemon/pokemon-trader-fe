@@ -209,3 +209,7 @@
 .PokemonNavbar {
   background: var(--BackgroundGradient);
 }
+
+.BorderlessCard{
+  border: 0 !important;
+}

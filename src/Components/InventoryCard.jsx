@@ -22,6 +22,10 @@ const InventoryCard = () => {
 
     const evolutionNames = ['Pichu', 'Pikachu', 'Raichu'];
 
+    const moves = ['Move 1', 'Move 2', 'Move 3', 'Move 4'];
+
+    const flavorText = "Lorem ipsum dolor sit amet, consectetur adipiscing elit.";
+
     const cardClick = (image) => {
         // console.log('Pokemon clicked: $(image)');
         setSelectedImage(image);
@@ -46,7 +50,7 @@ const InventoryCard = () => {
             <Row xs={1} md={6} className="g-4">
                 {images.map((image, idx) => (
                     <Col key={idx}>
-                        <Card onClick={() => cardClick(image)} style={{ cursor: 'pointer' }}>
+                        <Card onClick={() => cardClick(image)} style={{ cursor: 'pointer' }} className="BorderlessCard">
                             <Card.Img variant="top" src={image}/>
                         </Card>
                     </Col>
@@ -63,6 +67,8 @@ const InventoryCard = () => {
         itemHeld="Choice Specs"
         evolutionImages={evolutionImages}
         evolutionNames={evolutionNames}
+        moves={moves}
+        flavorText={flavorText}
         onTrade={openTradeModal}
         />
         <InventoryTradeModal
