@@ -41,7 +41,7 @@ function addToInventoryButton({ pokemon, children }) {
             id="move1"
             style={{ margin: "5px" }}
           >
-            <option>Open this select menu</option>
+            <option>Select move</option>
             {pokemon && renderMoveOptions(pokemon.moves)}
           </Form.Select>
 
@@ -50,7 +50,7 @@ function addToInventoryButton({ pokemon, children }) {
             id="move1"
             style={{ margin: "5px" }}
           >
-            <option>Open this select menu</option>
+            <option>Select move</option>
             {pokemon && renderMoveOptions(pokemon.moves)}
           </Form.Select>
 
@@ -59,7 +59,7 @@ function addToInventoryButton({ pokemon, children }) {
             id="move3"
             style={{ margin: "5px" }}
           >
-            <option>Open this select menu</option>
+            <option>Select move</option>
             {pokemon && renderMoveOptions(pokemon.moves)}
           </Form.Select>
 
@@ -68,8 +68,18 @@ function addToInventoryButton({ pokemon, children }) {
             id="move4"
             style={{ margin: "5px" }}
           >
-            <option>Open this select menu</option>
+            <option>Select move</option>
             {pokemon && renderMoveOptions(pokemon.moves)}
+          </Form.Select>
+
+          <Form.Label>Item</Form.Label>
+          <Form.Select
+            aria-label="Default select example"
+            id="move1"
+            style={{ margin: "5px", marginBottom:"15px" }}
+          >
+            <option>Select Item</option>
+            {/* {pokemon && renderMoveOptions(pokemon.item)} */}
           </Form.Select>
 
           <div className="outer">
