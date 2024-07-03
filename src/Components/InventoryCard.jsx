@@ -7,12 +7,20 @@ import InventoryTradeModal from './InventoryTradeModal';
 
 const images = ['https://cdn0.iconfinder.com/data/icons/pokemon-go-vol-2/135/_pikachu-128.png', 'https://cdn0.iconfinder.com/data/icons/pokemon-go-vol-2/135/_pikachu-128.png', 'https://cdn0.iconfinder.com/data/icons/pokemon-go-vol-2/135/_pikachu-128.png', 'https://cdn0.iconfinder.com/data/icons/pokemon-go-vol-2/135/_pikachu-128.png', 'https://cdn0.iconfinder.com/data/icons/pokemon-go-vol-2/135/_pikachu-128.png', 'https://cdn0.iconfinder.com/data/icons/pokemon-go-vol-2/135/_pikachu-128.png', 'https://cdn0.iconfinder.com/data/icons/pokemon-go-vol-2/135/_pikachu-128.png', 'https://cdn0.iconfinder.com/data/icons/pokemon-go-vol-2/135/_pikachu-128.png', 'https://cdn0.iconfinder.com/data/icons/pokemon-go-vol-2/135/_pikachu-128.png', 'https://cdn0.iconfinder.com/data/icons/pokemon-go-vol-2/135/_pikachu-128.png'];
 
+
+
+
 const InventoryCard = () => {
     const [isModalOpen, setIsModalOpen] = useState(false);
     const [selectedImage, setSelectedImage] = useState(null);
     const [isTradeModalOpen, setIsTradeModalOpen] = useState(false);
+    
 
     const pokemonList = ['Pikachu', 'Raichu', 'Bulbasaur', 'Charmander', 'Squirtle'];
+
+    const evolutionImages = ['https://cdn0.iconfinder.com/data/icons/pokemon-go-vol-2/135/_pikachu-128.png', 'https://cdn0.iconfinder.com/data/icons/pokemon-go-vol-2/135/_pikachu-128.png', 'https://cdn0.iconfinder.com/data/icons/pokemon-go-vol-2/135/_pikachu-128.png'];
+
+    const evolutionNames = ['Pichu', 'Pikachu', 'Raichu'];
 
     const cardClick = (image) => {
         console.log('Pokemon clicked: $(image)');
@@ -48,6 +56,13 @@ const InventoryCard = () => {
         show={isModalOpen}
         onHide={closeModal}
         image={selectedImage}
+        name="Pikachu"
+        pokedexNumber="0025"
+        level="33"
+        type="Electric"
+        itemHeld="Choice Specs"
+        evolutionImages={evolutionImages}
+        evolutionNames={evolutionNames}
         onTrade={openTradeModal}
         />
         <InventoryTradeModal
