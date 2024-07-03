@@ -73,7 +73,11 @@ function AddToInventoryButton({ pokemon, children }) {
 
   return (
     <>
-      <div onClick={handleShow} className="ContainerButon" style={{ cursor: 'pointer' }}>
+      <div
+        onClick={handleShow}
+        className="ContainerButon"
+        style={{ cursor: "pointer" }}
+      >
         {children}
       </div>
       <Modal show={show} onHide={handleClose}>
