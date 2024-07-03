@@ -25,11 +25,13 @@
 .ContainerButon {
   width: 70vw;
   border: 0;
-  background-color: transparent;
-  display: flex;
+  background-color: transparent !important;
+  border: 0 !important;
+  display: flex !important;
   align-items: center;
   justify-content: space-between;
   margin: 10px;
+  color: #303b3a !important;
 }
 
 .PokemonIcon {

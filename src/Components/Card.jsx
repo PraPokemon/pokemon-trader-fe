@@ -16,7 +16,8 @@ function Card({ pokemon, loading }) {
             className="Container"
             key={item.id}
           >
-            <AddToInventoryButton pokemon={item} className="ContainerButon">
+            {/* <AddToInventoryButton pokemon={item} className="ContainerButon"> */}
+            <button className="ContainerButon">
               <h1>{item.id}</h1>
               <h2>{item.name}</h2>
               <div className="TypesPokedex">
@@ -31,7 +32,8 @@ function Card({ pokemon, loading }) {
                   <p>No image available</p>
                 )}
               </div>
-              </AddToInventoryButton>
+              </button>
+              {/* </AddToInventoryButton> */}
           </div>
         ))
       )}
