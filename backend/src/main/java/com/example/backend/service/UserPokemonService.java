@@ -13,6 +13,9 @@ public class UserPokemonService {
 
     @Autowired
     private UserPokemonRepository userPokemonRepository;
+    
+    @Autowired
+    private SequenceService sequenceService;
 
     public List<UserPokemon> getAllUserPokemons() {
         return userPokemonRepository.findAll();
@@ -23,6 +26,9 @@ public class UserPokemonService {
     }
 
     public UserPokemon createUserPokemon(UserPokemon userPokemon) {
+    	if (userPokemon.getUserPokemonId() == 0) {
+            userPokemon.setUserPokemonId(sequenceService.getNextSequence("userPokemon_sequence"));
+        }
         return userPokemonRepository.save(userPokemon);
     }
 

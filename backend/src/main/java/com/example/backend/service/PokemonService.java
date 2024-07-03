@@ -5,6 +5,7 @@ import com.example.backend.model.Pokemon.Move;
 import com.example.backend.repository.PokemonRepository;
 
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,8 +23,8 @@ public class PokemonService {
     public Page<Pokemon> getAllPokemons(int page, int size) {
         return pokemonRepository.findAll(PageRequest.of(page, size));
     }
-    public Pokemon getPokemonById(int id) {
-        return pokemonRepository.findById(id).orElse(null);
+    public Optional<Pokemon> getPokemonById(int id) {
+        return pokemonRepository.findById(id);
     }
 
     public Pokemon createPokemon(Pokemon pokemon) {

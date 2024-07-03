@@ -20,6 +20,9 @@ public class UserService {
 
     @Autowired
     private UserRepository userRepository;
+    
+    @Autowired
+    private SequenceService sequenceService;
 
     public List<User> getAllUsers() {
         return userRepository.findAll();
@@ -34,6 +37,9 @@ public class UserService {
     }
 
     public User createUser(User user) {
+    	if (user.getUserId() == 0) {
+            user.setUserId(sequenceService.getNextSequence("users_sequence"));
+        }
         return userRepository.save(user);
     }
 

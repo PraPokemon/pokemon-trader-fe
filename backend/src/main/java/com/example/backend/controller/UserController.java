@@ -6,7 +6,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.Optional;
 
 @RestController
@@ -32,9 +34,16 @@ public class UserController {
         return userService.getUserByUsername(username);
     }
 
-    @PostMapping
-    public User createUser(@RequestBody User user) {
-        return userService.createUser(user);
+    @PostMapping("/signup")
+    public ResponseEntity<Map<String, String>> signup(@RequestBody User user) {
+        Map<String, String> response = new HashMap<>();
+        if (userService.getUserByUsername(user.getUsername()).isPresent()) {
+            response.put("message", "User already exists");
+            return ResponseEntity.badRequest().body(response);
+        }
+        userService.createUser(user);
+        response.put("message", "User created successfully");
+        return ResponseEntity.ok(response);
     }
 
     @PutMapping("/{id}")

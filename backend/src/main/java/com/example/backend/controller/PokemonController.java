@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Optional;
 
 @RestController
 @RequestMapping("/pokemons")
@@ -33,7 +34,7 @@ public class PokemonController {
     }
 
     @GetMapping("/{id}")
-    public Pokemon getPokemonById(@PathVariable int id) {
+    public Optional<Pokemon> getPokemonById(@PathVariable int id) {
         return pokemonService.getPokemonById(id);
     }
 
@@ -51,8 +52,9 @@ public class PokemonController {
     public void deletePokemon(@PathVariable int id) {
         pokemonService.deletePokemon(id);
     }
-    @GetMapping("/moves")
-    public List<Pokemon.Move> getAllMoves() {
-        return pokemonService.getAllMoves();
+    @GetMapping("/{pokemonId}/moves")
+    public List<Pokemon.Move> getMovesByPokemonId(@PathVariable int pokemonId) {
+        Pokemon pokemon = pokemonService.getPokemonById(pokemonId).orElseThrow(() -> new RuntimeException("Pokemon not found"));
+        return pokemon.getMoves();
     }
 }
