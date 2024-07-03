@@ -2,7 +2,7 @@ import { useState } from "react";
 import Button from "react-bootstrap/Button";
 import Modal from "react-bootstrap/Modal";
 
-function TradeOfferModal({ children, ...props }) {
+function TradeOfferModal({ children, pokemon }) {
   const [show, setShow] = useState(false);
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
@@ -23,18 +23,28 @@ function TradeOfferModal({ children, ...props }) {
         <Modal.Body>
           <div className="TradeOfferGrid">
             <div className="TradeOfferImage">
-              <img src="" alt="" />
-              Add pokemon image
+              <img
+                src={`https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/${pokemon.id}.png`}
+                alt={pokemon.id}
+              />
             </div>
             <div className="TradeOfferReqirements">
-              {" "}
-              Requirements for the trade
+              
+              <h5>Requierments</h5>
+              <h5>Pokemon: Scolipied</h5>
+              <h5>lvl: 100</h5>
             </div>
-            <div className="TradeOfferPokemonDiscription">Pokemon detatils</div>
+            <div className="TradeOfferPokemonDiscription">
+            <h4>details</h4>
+              <h5>Pokemon: Scolipied</h5>
+              <h5>lvl: 10</h5>
+              <h5>Player: Farquad</h5>
+              <h5>Item: MaryBeary</h5>
+            </div>
           </div>
-          <hr />
-          <div>Add your pokemon who mach the reqirements</div>
-          </Modal.Body>
+          <hr/>
+          <div> your pokemon that meet the requiements</div>
+        </Modal.Body>
         <Modal.Footer>
           <Button variant="secondary" onClick={handleClose}>
             Close
