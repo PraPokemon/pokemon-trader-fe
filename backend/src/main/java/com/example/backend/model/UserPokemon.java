@@ -20,5 +20,5 @@ public class UserPokemon {
     private int level;
     private List<Pokemon.Type> types;
     private List<Pokemon.Move> moves;
-    private String item;
+    private Items item;
 }
