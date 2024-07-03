@@ -5,10 +5,9 @@ import PokemonFilterSearch from "./PokemonFilterSerch";
 import LevelFilter from "./FilterLvL";
 import Card from "./Card";
 
-function PokedexCardGroup() {
+function PokedexCardGroup({searchTerm}) {
   const [pokeData, setPokeData] = useState([]);
   const [loading, setLoading] = useState(true);
-  const [searchTerm, setSearchTerm] = useState("");
   const [levelRange, setLevelRange] = useState([0, 100]);
   const [page, setPage] = useState(0);
   const [totalPages, setTotalPages] = useState(0);
@@ -39,10 +38,7 @@ function PokedexCardGroup() {
 
   return (
     <div>
-      <div className="filter-container">
-        <PokemonFilterSearch setSearchTerm={setSearchTerm} />
-        <LevelFilter setLevelRange={setLevelRange} />
-      </div>
+      <p>Current Search Term: {searchTerm}</p>
       <Card pokemon={pokeData} loading={loading} />
       <div className="PokedexCardButtons">
         <Button
