@@ -1,5 +1,5 @@
-import Button from 'react-bootstrap/Button';
-import Modal from 'react-bootstrap/Modal';
+import Button from "react-bootstrap/Button";
+import Modal from "react-bootstrap/Modal";
 
 function TradeOfferModal(props) {
   return (
@@ -10,40 +10,28 @@ function TradeOfferModal(props) {
       centered
     >
       <Modal.Header closeButton>
-        <Modal.Title id="contained-modal-title-vcenter">
-          Modal heading
-        </Modal.Title>
+        <Modal.Title id="contained-modal-title-vcenter">Trade</Modal.Title>
       </Modal.Header>
       <Modal.Body>
-        <h4>Centered Modal</h4>
-        <p>
-          Cras mattis consectetur purus sit amet fermentum. Cras justo odio,
-          dapibus ac facilisis in, egestas eget quam. Morbi leo risus, porta ac
-          consectetur ac, vestibulum at eros.
-        </p>
+        <div className="TradeOfferGrid">
+          <div className="TradeOfferImage">
+            <img src="" alt="" />
+            Add pokemon image
+          </div>
+          <div className="TradeOfferReqirements">
+            {" "}
+            Requirements for the trade
+          </div>
+          <div className="TradeOfferPokemonDiscription">Pokemon detatils</div>
+        </div>
+        <hr />
+        <div>Add your pokemon who mach the reqirements</div>
       </Modal.Body>
       <Modal.Footer>
-        <Button onClick={props.onHide}>Close</Button>
+        <Button onClick={props.onHide}>Accept trade</Button>
       </Modal.Footer>
     </Modal>
   );
 }
 
-function App() {
-  const [modalShow, setModalShow] = React.useState(false);
-
-  return (
-    <>
-      <Button variant="primary" onClick={() => setModalShow(true)}>
-        Launch vertically centered modal
-      </Button>
-
-      <MyVerticallyCenteredModal
-        show={modalShow}
-        onHide={() => setModalShow(false)}
-      />
-    </>
-  );
-}
-
-render(<App />);
+export default TradeOfferModal;

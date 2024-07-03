@@ -1,20 +1,10 @@
 import React, { useState } from "react";
-
+import Button from "react-bootstrap/Button";
+import Modal from "react-bootstrap/Modal";
+import TradeOfferModal from "./TradeOfferModal";
 
 function TradeCard({ pokemon, loading }) {
-  
-  const [expansionStates, setExpansionStates] = useState({});
-
-  const handleExpandClick = (itemId) => {
-    setExpansionStates((prevStates) => ({
-      ...prevStates,
-      [itemId]: !prevStates[itemId],
-    }));
-  };
-
-  const handleExpandedContentClick = (e) => {
-    e.stopPropagation();
-  };
+  const [modalShow, setModalShow] = React.useState(false);
 
   return (
     <>
@@ -25,12 +15,11 @@ function TradeCard({ pokemon, loading }) {
       ) : (
         pokemon.map((item) => {
           return (
-            <div
-              className="Container"
-              key={item.id}
-              // onClick={() => handleExpandClick(item.id)}
-            >
-              <button className="ContainerButon">
+            <div className="Container" key={item.id}>
+              <button
+                className="ContainerButon"
+                onClick={() => setModalShow(true)}
+              >
                 <h1>{item.id}</h1>
                 <h2>{item.name}</h2>
                 <div className="TypesPokedex">
@@ -39,10 +28,14 @@ function TradeCard({ pokemon, loading }) {
                   ))}
                 </div>
                 <div className="PokemonIcon">
-                <img src={item.sprites.front_default} alt={item.id} />
+                  <img src={item.sprites.front_default} alt={item.id} />
                 </div>
-                
               </button>
+
+              <TradeOfferModal
+                show={modalShow}
+                onHide={() => setModalShow(false)}
+              />
             </div>
           );
         })
