@@ -2,8 +2,6 @@ import React, { useState } from "react";
 import AddToInventoryButton from "./AddToInventoryButton";
 
 function Card({ pokemon, loading }) {
-  
-
   return (
     <>
       {loading ? (
@@ -12,11 +10,8 @@ function Card({ pokemon, loading }) {
         </div>
       ) : (
         pokemon?.map((item) => (
-          <div
-            className="Container"
-            key={item.id}
-          >
-            <AddToInventoryButton pokemon={item} >
+          <div className="Container" key={item.id}>
+            <AddToInventoryButton pokemon={item}>
               <h1>{item.id}</h1>
               <h2>{item.name}</h2>
               <div className="TypesPokedex">
@@ -25,13 +20,12 @@ function Card({ pokemon, loading }) {
                 ))}
               </div>
               <div className="PokemonIcon">
-                {item.sprites && item.sprites.front_default ? (
-                  <img src={item.sprites.front_default} alt={item.id} />
-                ) : (
-                  <p>No image available</p>
-                )}
+                <img
+                  src={`https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/${item.id}.png`}
+                  alt={item.id}
+                />
               </div>
-              </AddToInventoryButton>
+            </AddToInventoryButton>
           </div>
         ))
       )}

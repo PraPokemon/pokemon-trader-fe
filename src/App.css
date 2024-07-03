@@ -198,12 +198,8 @@
 }
 
 .modal-backdrop {
-  background-color: rgba(
-    0,
-    0,
-    0,
-    0.5
-  ); /* Adjust the last value to control opacity */
+  background-color: rgba(0,0, 0, 0.5)!important; 
+  opacity: 0.5 !important;
 }
 
 .PokemonNavbar {
