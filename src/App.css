@@ -107,7 +107,7 @@
   min-width: 0;
   box-sizing: border-box;
   padding: 30px;
-  margin: 5px;
+  margin: 10px;
 }
 .FilterTypeButonGroup {
   width: 80vw;
@@ -133,8 +133,6 @@
   background-color: #fde74c;
   margin: 30px;
   padding: 15px;
-  border-top: 10px solid #5bc0eb;
-  border-left: 10px solid #5bc0eb;
   display: flex;
   align-items: center;
   justify-content: center;
