@@ -1,15 +1,21 @@
 @import url("https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap");
+/* Define the CSS variable */
+:root {
+  --BackgroundGradient: linear-gradient(208deg, rgba(155,197,61,1) 0%, rgba(238,226,74,1) 43%, rgba(253,231,76,1) 87%);
+}
+
+
 * {
   font-family: "Roboto", sans-serif;
   font-weight: 400;
   font-style: normal;
-  color: #404e4d;
+  color: #303b3a;
 }
 
 .Container {
   width: 80vw;
   margin: 10px;
-  background-color: #fde74c;
+  background-image: var(--BackgroundGradient);
   border: 0;
   border-left: 10px solid #5bc0eb;
   border-radius: 1rem;
@@ -19,22 +25,22 @@
 .ContainerButon {
   width: 70vw;
   border: 0;
-  background-color: transparent;
-  display: flex;
+  background-color: transparent !important;
+  border: 0 !important;
+  display: flex !important;
   align-items: center;
   justify-content: space-between;
   margin: 10px;
+  color: #303b3a !important;
 }
 
 .PokemonIcon {
   border-radius: 50%;
   background-color: white !important;
   margin: 5px;
-  border: 5px solid #5bc0eb;
 }
 
 .ButonBasic {
-  color: white;
   border: 0;
   background-color: #9bc53d;
   border-radius: 1rem;
@@ -60,11 +66,9 @@
 .FilterGroup {
   border-end-end-radius: 1rem;
   border-top-left-radius: 1rem;
-  background-color: #fde74c;
+  background-image: var(--BackgroundGradient);
   margin: 30px;
   padding: 15px;
-  border-top: 10px solid #5bc0eb;
-  border-left: 10px solid #5bc0eb;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -95,7 +99,8 @@
   border-radius: 50%;
   cursor: pointer;
   overflow: hidden;
-  border: white solid 5px;
+  /* border: white solid 5px; */
+  border: 0;
 
   display: flex;
   justify-content: center;
@@ -104,7 +109,7 @@
   min-width: 0;
   box-sizing: border-box;
   padding: 30px;
-  margin: 5px;
+  margin: 10px;
 }
 .FilterTypeButonGroup {
   width: 80vw;
@@ -130,8 +135,6 @@
   background-color: #fde74c;
   margin: 30px;
   padding: 15px;
-  border-top: 10px solid #5bc0eb;
-  border-left: 10px solid #5bc0eb;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -195,9 +198,14 @@
 }
 
 .modal-backdrop {
-  background-color: rgba(0, 0, 0, 0.5); /* Adjust the last value to control opacity */
+  background-color: rgba(
+    0,
+    0,
+    0,
+    0.5
+  ); /* Adjust the last value to control opacity */
 }
 
-.PokemonNavbar{
-
+.PokemonNavbar {
+  background: var(--BackgroundGradient);
 }

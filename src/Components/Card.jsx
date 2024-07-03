@@ -2,18 +2,7 @@ import React, { useState } from "react";
 import AddToInventoryButton from "./AddToInventoryButton";
 
 function Card({ pokemon, loading }) {
-  const [expansionStates, setExpansionStates] = useState({});
-
-  const handleExpandClick = (itemId) => {
-    setExpansionStates((prevStates) => ({
-      ...prevStates,
-      [itemId]: !prevStates[itemId],
-    }));
-  };
-
-  const handleExpandedContentClick = (e) => {
-    e.stopPropagation();
-  };
+  
 
   return (
     <>
@@ -26,8 +15,8 @@ function Card({ pokemon, loading }) {
           <div
             className="Container"
             key={item.id}
-            onClick={() => handleExpandClick(item.id)}
           >
+            {/* <AddToInventoryButton pokemon={item} className="ContainerButon"> */}
             <button className="ContainerButon">
               <h1>{item.id}</h1>
               <h2>{item.name}</h2>
@@ -43,28 +32,8 @@ function Card({ pokemon, loading }) {
                   <p>No image available</p>
                 )}
               </div>
-            </button>
-            {expansionStates[item.id] && (
-              <div className="ContainerButon" onClick={handleExpandedContentClick}>
-                <div className="TypesPokedex">
-                  <h4>Abilities: </h4>
-                  {item.abilities.map((ability) => (
-                    <h5 key={ability.ability.name}>{ability.ability.name}</h5>
-                  ))}
-                </div>
-                <div>
-                  <h4>Height: </h4>
-                  <h4>{item.height} ft</h4>
-                </div>
-                <div>
-                  <h4>Weight: </h4>
-                  <h4>{item.weight} lb</h4>
-                </div>
-                <div>
-                  <AddToInventoryButton pokemon={item} />
-                </div>
-              </div>
-            )}
+              </button>
+              {/* </AddToInventoryButton> */}
           </div>
         ))
       )}
