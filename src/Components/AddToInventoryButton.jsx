@@ -9,8 +9,15 @@ function AddToInventoryButton({ pokemon, children }) {
   const [moves, setMoves] = useState([]);
   const [selectedMoves, setSelectedMoves] = useState(["", "", "", ""]);
   const [sliderValue, setSliderValue] = useState(50);
+  const [message, setMessage] = useState('');
 
-  const handleClose = () => setShow(false);
+  const userId = 0; // Temporary hard-coded userId
+
+  const handleClose = () => {
+    setMessage('');
+    setShow(false);
+  };
+
   const handleShow = () => {
     setShow(true);
     fetchMoves();
@@ -28,24 +35,27 @@ function AddToInventoryButton({ pokemon, children }) {
 
   const handleSave = () => {
     const userPokemon = {
-      userId: 0, // Replace with the actual userId
+      userId: userId,
       pokemonId: pokemon.id,
       level: sliderValue,
       moves: selectedMoves.filter(move => move) // Filter out empty moves
     };
 
-    axios.post("/userPokemons", userPokemon)
+    axios.post(`/userInventories/${userId}/addPokemon`, userPokemon)
       .then(response => {
-        console.log("UserPokemon created:", response.data);
+        setMessage("Pokemon added to inventory successfully!");
         handleClose();
       })
       .catch(error => {
-        console.error("There was an error creating the UserPokemon!", error);
+        const errorMessage = error.response && error.response.data && error.response.data.message 
+                             ? error.response.data.message 
+                             : 'An error occurred. Please try again.';
+        setMessage(errorMessage);
       });
   };
 
   const fetchMoves = () => {
-    axios.get("/pokemons/moves")
+    axios.get(`/pokemons/${pokemon.id}/moves`)
       .then(response => {
         if (Array.isArray(response.data)) {
           setMoves(response.data);
@@ -110,6 +120,7 @@ function AddToInventoryButton({ pokemon, children }) {
               />
             </div>
           </div>
+          {message && <div className="alert alert-info">{message}</div>}
         </Modal.Body>
         <Modal.Footer>
           <Button variant="secondary" onClick={handleClose}>
