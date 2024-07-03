@@ -1,6 +1,7 @@
 package com.example.backend.service;
 
 import com.example.backend.model.Pokemon;
+import com.example.backend.model.Pokemon.Move;
 import com.example.backend.repository.PokemonRepository;
 
 import java.util.List;
@@ -59,4 +60,10 @@ public class PokemonService {
 
         return new PageImpl<>(paginatedPokemons, PageRequest.of(page, size), filteredPokemons.size());
     }
+	public List<Move> getAllMoves() {
+		return pokemonRepository.findAll().stream()
+                .flatMap(pokemon -> pokemon.getMoves().stream())
+                .distinct()
+                .collect(Collectors.toList());
+	}
 }

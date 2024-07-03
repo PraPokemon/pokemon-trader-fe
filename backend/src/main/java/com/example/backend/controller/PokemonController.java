@@ -1,12 +1,14 @@
 package com.example.backend.controller;
 
 import com.example.backend.model.Pokemon;
+
 import com.example.backend.service.PokemonService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 @RestController
@@ -48,5 +50,9 @@ public class PokemonController {
     @DeleteMapping("/{id}")
     public void deletePokemon(@PathVariable int id) {
         pokemonService.deletePokemon(id);
+    }
+    @GetMapping("/moves")
+    public List<Pokemon.Move> getAllMoves() {
+        return pokemonService.getAllMoves();
     }
 }

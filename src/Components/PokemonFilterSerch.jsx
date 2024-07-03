@@ -14,6 +14,7 @@ function PokemonFilterSearch({ setSearchTerm }) {
         onChange={handleSearchChange}
       />
     </>
+    
   );
 }
 

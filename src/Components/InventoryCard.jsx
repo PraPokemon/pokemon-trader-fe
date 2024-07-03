@@ -23,7 +23,7 @@ const InventoryCard = () => {
     const evolutionNames = ['Pichu', 'Pikachu', 'Raichu'];
 
     const cardClick = (image) => {
-        console.log('Pokemon clicked: $(image)');
+        // console.log('Pokemon clicked: $(image)');
         setSelectedImage(image);
         setIsModalOpen(true);
     };

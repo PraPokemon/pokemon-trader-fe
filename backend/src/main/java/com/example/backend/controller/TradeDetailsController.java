@@ -43,4 +43,5 @@ public class TradeDetailsController {
     public void deleteTradeDetails(@PathVariable int id) {
         tradeDetailsService.deleteTradeDetails(id);
     }
+    
 }
