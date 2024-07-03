@@ -4,14 +4,21 @@ import Modal from "react-bootstrap/Modal";
 import { Form } from "react-bootstrap";
 import { Link } from "react-router-dom";
 import axios from '../api/axiosConfig';
+import SignupModal from "./SignUpModal";
+
 
 function LoginModal() {
-  const [show, setShow] = useState(true);
+  const [showLoginModal, setShowLoginModal] = useState(true);
+  const [showSignupModal, setShowSignupModal] = useState(false);
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
   const [error, setError] = useState('');
 
-  const handleClose = () => setShow(false);
+  const handleLoginClose = () => setShowLoginModal(false);
+  const handleLoginShow = () => setShowLoginModal(true);
+  const handleSignupClose = () => setShowSignupModal(false);
+  const handleSignupShow = () => setShowSignupModal(true);
+
 
   const handleLogin = async () => {
     console.log('Attempting login with username:', username);
@@ -20,7 +27,7 @@ function LoginModal() {
       if (response.status === 200) {
         // Handle successful login
         console.log('Login successful:', response.data);
-        setShow(false); // Close the modal on successful login
+        setShowLoginModal(false); // Close the modal on successful login
       }
     } catch (err) {
       console.error('Login failed:', err);
@@ -28,15 +35,20 @@ function LoginModal() {
     }
   };
 
+  const handleSignupClick = () => {
+    setShowLoginModal(false); // Close the login modal
+    setShowSignupModal(true); // Open the signup modal
+  };
+
   return (
     <>
       <Modal
-        show={show}
-        onHide={handleClose}
+        show={showLoginModal}
+        onHide={handleLoginClose}
         backdrop="static"
         keyboard={false}
       >
-        <Modal.Header>
+        <Modal.Header closeButton>
           <Modal.Title>Login</Modal.Title>
         </Modal.Header>
         <Modal.Body>
@@ -66,13 +78,14 @@ function LoginModal() {
           </>
         </Modal.Body>
         <Modal.Footer>
-          <Link to="">Sign Up</Link>
-          <Button variant="secondary" onClick={handleClose}>
+          <Link to="#" onClick={handleSignupClick}>Sign Up</Link>
+          <Button variant="secondary" onClick={handleLoginClose}>
             Close
           </Button>
           <Button variant="primary" onClick={handleLogin}>Login</Button>
         </Modal.Footer>
       </Modal>
+      <SignupModal show={showSignupModal} onHide={handleSignupClose} />
     </>
   );
 }
