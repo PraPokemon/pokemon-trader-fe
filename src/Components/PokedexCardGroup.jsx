@@ -38,7 +38,6 @@ function PokedexCardGroup({searchTerm}) {
 
   return (
     <div>
-      <p>Current Search Term: {searchTerm}</p>
       <Card pokemon={pokeData} loading={loading} />
       <div className="PokedexCardButtons">
         <Button
