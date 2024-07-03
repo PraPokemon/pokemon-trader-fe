@@ -6,11 +6,11 @@ import Navbar from "react-bootstrap/Navbar";
 function NavbarPokemon() {
   return (
     <>
+      
       <Navbar
         expand="lg"
-        className="PokemonNavbar bg-body-tertiary"
-        bg="dark"
-        variant="warning"
+        className="PokemonNavbar "
+        bg="primary" data-bs-theme="dark"
       >
         <Container>
           <Navbar.Brand as={Link} to="/">Poketrader</Navbar.Brand>
