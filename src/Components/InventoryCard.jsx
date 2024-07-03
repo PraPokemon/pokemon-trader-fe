@@ -15,7 +15,7 @@ const InventoryCard = () => {
     const pokemonList = ['Pikachu', 'Raichu', 'Bulbasaur', 'Charmander', 'Squirtle'];
 
     const cardClick = (image) => {
-        console.log('Pokemon clicked: $(image)');
+        // console.log('Pokemon clicked: $(image)');
         setSelectedImage(image);
         setIsModalOpen(true);
     };

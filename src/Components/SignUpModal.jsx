@@ -39,11 +39,10 @@ function loginModal() {
           </>
         </Modal.Body>
         <Modal.Footer>
-         <Link as={Link} to="">Sign Up</Link>
           <Button variant="secondary" onClick={handleClose}>
             Close
           </Button>
-          <Button variant="primary">Login</Button>
+          <Button variant="primary">Sign Up</Button>
         </Modal.Footer>
       </Modal>
     </>

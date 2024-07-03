@@ -28,6 +28,8 @@ function TradeCardGroup() {
     setPokeData(resolvedResults);
   };
 
+
+
   useEffect(() => {
     pokeFunc();
   }, [url]);
