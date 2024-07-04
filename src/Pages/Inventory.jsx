@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from 'react';
 import LoginModal from "../Components/LoginModal";
 import Navbar from "../Components/Navbar";
 import InventoryCard from "../Components/InventoryCard";
