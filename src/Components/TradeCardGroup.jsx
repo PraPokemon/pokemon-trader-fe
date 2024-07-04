@@ -1,71 +1,43 @@
-import { useState } from "react";
-import { useEffect } from "react";
-import axios from "axios";
-import Button from "react-bootstrap/Button";
-import TradeCard from "./TradeCard";
+import React, { useEffect, useState } from 'react';
+import axios from '../api/axiosConfig';
+import TradeCard from './TradeCard';
 
-function TradeCardGroup({ minLevel, maxLevel, searchTerm }) {
-  const [pokeData, setPokeData] = useState([]);
-  const [loading, setLoading] = useState(true);
-  const [url, setUrl] = useState("https://pokeapi.co/api/v2/pokemon/");
-  const [NextUrl, setNextUrl] = useState();
-  const [PreviousUrl, setPreviousUrl] = useState();
+const TradeCardGroup = ({ minLevel, maxLevel, searchTerm }) => {
+    const [trades, setTrades] = useState([]);
 
-  const pokeFunc = async () => {
-    setLoading(true);
-    const results = await axios.get(url);
-    setNextUrl(results.data.next);
-    setPreviousUrl(results.data.previous);
-    await getPokemon(results.data.results);
-    setLoading(false);
-  };
+    useEffect(() => {
+        const fetchPendingTrades = async () => {
+            try {
+                const response = await axios.get('/trades/pending');
+                setTrades(response.data);
+            } catch (error) {
+                console.error("Error fetching pending trades:", error);
+            }
+        };
 
-  const getPokemon = async (results) => {
-    const promises = results.map(async (item) => {
-      const result = await axios.get(item.url);
-      return result.data;
-    });
-    const resolvedResults = await Promise.all(promises);
-    setPokeData(resolvedResults);
-  };
+        fetchPendingTrades();
+    }, []);
 
+    const handleAcceptTrade = async (trade) => {
+        try {
+            await axios.post(`/trades/${trade._id}/accept`, {
+                acceptingUserId:0 /* your user id */,
+                acceptingUserPokemonId:2 /* your pokemon id */
+            });
+            // Optionally, you can update the state to remove the accepted trade
+            setTrades(trades.filter(t => t._id !== trade._id));
+        } catch (error) {
+            console.error("Error accepting trade:", error);
+        }
+    };
 
-
-  useEffect(() => {
-    pokeFunc();
-  }, [url]);
-
-  return (
-    <>
-      <div>
-        <TradeCard pokemon={pokeData} loading={loading} />
-        <div className="PokedexCardButons">
-          <Button
-            variant="success"
-            style={{ margin: "5px" }}
-            onClick={() => {
-              setPokeData([]);
-              setUrl(PreviousUrl);
-            }}
-            type="button"
-          >
-            Previous
-          </Button>{" "}
-          <Button
-            variant="success"
-            style={{ margin: "5px" }}
-            onClick={() => {
-              setPokeData([]);
-              setUrl(NextUrl);
-            }}
-            type="button"
-          >
-            Next
-          </Button>{" "}
+    return (
+        <div className="trade-card-group">
+            {trades.map((trade) => (
+                <TradeCard key={trade._id} trade={trade} onClick={handleAcceptTrade} />
+            ))}
         </div>
-      </div>
-    </>
-  );
-}
+    );
+};
 
 export default TradeCardGroup;

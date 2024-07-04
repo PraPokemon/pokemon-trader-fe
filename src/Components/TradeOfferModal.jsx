@@ -1,57 +1,66 @@
 import { useState } from "react";
 import Button from "react-bootstrap/Button";
 import Modal from "react-bootstrap/Modal";
+import axios from "../api/axiosConfig";
 
-function TradeOfferModal({ children, pokemon }) {
+function TradeOfferModal({ children, trade }) {
   const [show, setShow] = useState(false);
+  const [matchingPokemons, setMatchingPokemons] = useState([]);
   const handleClose = () => setShow(false);
-  const handleShow = () => setShow(true);
+  const handleShow = () => {
+    fetchMatchingPokemons();
+    setShow(true);
+  };
+
+  const fetchMatchingPokemons = async () => {
+    try {
+      const response = await axios.get(`/userpokemons/matching/${trade.tradeDetails[0].targetPokemonId}/${trade.tradeDetails[0].minLevel}`);
+      setMatchingPokemons(response.data);
+    } catch (error) {
+      console.error("Error fetching matching pokemons:", error);
+    }
+  };
+
+  const acceptTrade = async (acceptingUserPokemonId) => {
+    try {
+      await axios.post(`/trades/${trade._id}/accept`, {
+        acceptingUserId: 1, // Replace with the actual user ID
+        acceptingUserPokemonId
+      });
+      handleClose();
+    } catch (error) {
+      console.error("Error accepting trade:", error);
+    }
+  };
 
   return (
     <>
-      <div
-        onClick={handleShow}
-        className="ContainerButon"
-        style={{ cursor: "pointer" }}
-      >
+      <div onClick={handleShow} className="ContainerButon" style={{ cursor: "pointer" }}>
         {children}
       </div>
       <Modal show={show} onHide={handleClose}>
         <Modal.Header closeButton>
-          <Modal.Title>Modal heading</Modal.Title>
+          <Modal.Title>Trade Details</Modal.Title>
         </Modal.Header>
         <Modal.Body>
           <div className="TradeOfferGrid">
-            <div className="TradeOfferImage">
-              <img
-                src={`https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/${pokemon.id}.png`}
-                alt={pokemon.id}
-              />
-            </div>
-            <div className="TradeOfferReqirements">
-              
-              <h5>Requierments</h5>
-              <h5>Pokemon: Scolipied</h5>
-              <h5>lvl: 100</h5>
-            </div>
-            <div className="TradeOfferPokemonDiscription">
-            <h4>details</h4>
-              <h5>Pokemon: Scolipied</h5>
-              <h5>lvl: 10</h5>
-              <h5>Player: Farquad</h5>
-              <h5>Item: MaryBeary</h5>
-            </div>
+            <div>Requirements: {trade.tradeDetails[0].targetPokemonId} Level: {trade.tradeDetails[0].minLevel}</div>
           </div>
-          <hr/>
-          <div> your pokemon that meet the requiements</div>
+          <hr />
+          <div>
+            Your Pokemon that meet the requirements:
+            <ul>
+              {matchingPokemons.map((pokemon) => (
+                <li key={pokemon.userPokemonId}>
+                  {pokemon.name} (Level: {pokemon.level})
+                  <button onClick={() => acceptTrade(pokemon.userPokemonId)}>Trade</button>
+                </li>
+              ))}
+            </ul>
+          </div>
         </Modal.Body>
         <Modal.Footer>
-          <Button variant="secondary" onClick={handleClose}>
-            Close
-          </Button>
-          <Button variant="primary" onClick={handleClose}>
-            Save Changes
-          </Button>
+          <Button variant="secondary" onClick={handleClose}>Close</Button>
         </Modal.Footer>
       </Modal>
     </>

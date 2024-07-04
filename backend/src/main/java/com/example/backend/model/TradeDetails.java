@@ -15,6 +15,7 @@ public class TradeDetails {
     private int tradeDetailId;
     private int tradeId;
     private int userPokemonId;
+    private int targetPokemonId;
     private TradeDirection direction;  
     private int minLevel;
 }

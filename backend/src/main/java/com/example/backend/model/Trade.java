@@ -19,4 +19,12 @@ public class Trade {
     private int receivingUserId;
     private TradeStatus status;  
     private List<TradeDetails> tradeDetails;
+    
+    public int getUserPokemonId() {
+        return tradeDetails.get(0).getUserPokemonId();
+    }
+
+    public int getTargetPokemonId() {
+        return tradeDetails.get(0).getTargetPokemonId();
+    }
 }

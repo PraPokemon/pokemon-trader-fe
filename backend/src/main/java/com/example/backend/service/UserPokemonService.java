@@ -53,4 +53,8 @@ public class UserPokemonService {
         }
         return null;
     }
+    public List<UserPokemon> getMatchingUserPokemons(int targetPokemonId, int minLevel) {
+        
+        return userPokemonRepository.findMatchingUserPokemons(targetPokemonId, minLevel);
+    }
 }

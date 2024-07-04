@@ -4,12 +4,12 @@ import axios from "../api/axiosConfig";
 import InventoryModal from './InventoryModal';
 import InventoryTradeModal from './InventoryTradeModal';
 
-const InventoryCard = ({ userId = 0 }) => {
+const InventoryCard = ({ userId = 0, pokemon, setPokemons }) => {
     const [isModalOpen, setIsModalOpen] = useState(false);
     const [selectedPokemon, setSelectedPokemon] = useState(null);
     const [isTradeModalOpen, setIsTradeModalOpen] = useState(false);
     const [inventory, setInventory] = useState([]);
-    
+
     useEffect(() => {
         fetchInventory();
     }, []);
@@ -17,12 +17,8 @@ const InventoryCard = ({ userId = 0 }) => {
     const fetchInventory = async () => {
         try {
             const response = await axios.get(`/userInventories/userId/${userId}`);
-            console.log("API Response:", response.data); // Log the response data
             if (response.data && response.data.pokemons) {
                 setInventory(response.data.pokemons);
-                console.log("Inventory Set:", response.data.pokemons); // Log the inventory state
-            } else {
-                console.log("No pokemons found in the response.");
             }
         } catch (error) {
             console.error("There was an error fetching the inventory!", error);
@@ -32,41 +28,37 @@ const InventoryCard = ({ userId = 0 }) => {
     const cardClick = (pokemon) => {
         setSelectedPokemon(pokemon);
         setIsModalOpen(true);
-        console.log("Selected Pokemon:", pokemon); // Log the selected pokemon
     };
 
     const closeModal = () => {
         setIsModalOpen(false);
     };
 
-    const openTradeModal = () => {
-        setIsModalOpen(false);
+    const openTradeModal = (pokemon) => {
+        setSelectedPokemon(pokemon);
         setIsTradeModalOpen(true);
     };
 
     const closeTradeModal = () => {
         setIsTradeModalOpen(false);
+        setSelectedPokemon(null);
     };
 
-    const handleConfirmTrade = async (pokemon, minLevel) => {
+    const handleTrade = async (trade) => {
         try {
-            const trade = {
-                initiatingUserId: 0, // Hardcoded
-                receivingUserId: null, 
-                status: "PENDING", 
-                tradeDetails: [{
-                    userPokemonId: selectedPokemon.pokemonId,
-                    direction: "SEND",
-                    minLevel: minLevel
-                }]
-            };
-            console.log("Trade payload:", trade); // Log the trade payload
+            console.log('Trade to be created:', trade);
+            const response = await axios.post('/trades', trade);
+            console.log('Trade created:', response.data);
 
-            const response = await axios.post(`/trades`, trade);
-            console.log("Trade created:", response.data);
-            setIsTradeModalOpen(false);
+            // Remove the traded Pokemon from the user's inventory in the UI
+            setInventory(prev => {
+                const updatedInventory = prev.filter(p => p.userPokemonId !== trade.tradeDetails[0].userPokemonId);
+                console.log('Updated Inventory:', updatedInventory);
+                return updatedInventory;
+            });
+            closeTradeModal(); // Close the trade modal after successful trade
         } catch (error) {
-            console.error("There was an error creating the trade!", error);
+            console.error('There was an error creating the trade!', error);
         }
     };
 
@@ -117,7 +109,8 @@ const InventoryCard = ({ userId = 0 }) => {
             <InventoryTradeModal
                 show={isTradeModalOpen}
                 onHide={closeTradeModal}
-                onConfirmTrade={handleConfirmTrade}
+                pokemon={selectedPokemon}
+                handleTrade={handleTrade}
             />
         </div>
     );

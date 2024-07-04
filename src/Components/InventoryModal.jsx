@@ -13,6 +13,7 @@ const InventoryModal = ({ show, onHide, pokemon, onTrade }) => {
     useEffect(() => {
         if (pokemon) {
             fetchPokemonDetails(pokemon.pokemonId);
+            console.log(pokemon.pokemonId);
         }
     }, [pokemon]);
 
@@ -29,10 +30,12 @@ const InventoryModal = ({ show, onHide, pokemon, onTrade }) => {
 
     const fetchEvolutionDetails = async (evolutionNames) => {
         try {
-            const evolutionPromises = evolutionNames.map(name => axios.get(`/pokemons/name/${name}`));
-            const evolutionResponses = await Promise.all(evolutionPromises);
-            const evolutions = evolutionResponses.map(response => response.data);
-            setEvolutionDetails(evolutions);
+            if (evolutionNames) {
+                const evolutionPromises = evolutionNames.map(name => axios.get(`/pokemons/name/${name}`));
+                const evolutionResponses = await Promise.all(evolutionPromises);
+                const evolutions = evolutionResponses.map(response => response.data);
+                setEvolutionDetails(evolutions);
+            }
         } catch (error) {
             console.error("There was an error fetching the evolution details!", error);
         }
@@ -48,7 +51,7 @@ const InventoryModal = ({ show, onHide, pokemon, onTrade }) => {
         <Modal show={show} onHide={onHide} size="lg">
             <Modal.Header closeButton>
                 <Modal.Title>Pokemon Details</Modal.Title>
-            </Modal.Header >
+            </Modal.Header>
             <Modal.Body>
                 <Row>
                     <Col xs={12} md={6}>
@@ -68,12 +71,12 @@ const InventoryModal = ({ show, onHide, pokemon, onTrade }) => {
                         <Row className="mb-3">
                             <Col>
                                 <p><strong>Pokedex Number:</strong> #{pokemon.pokemonId}</p>
-                                <p><strong>Type:</strong> {types.map(type => type.name).join(', ')}</p>
+                                <p><strong>Type:</strong> {types ? types.map(type => type.name).join(', ') : 'Unknown'}</p>
                                 <p><strong>Item Held:</strong> {pokemon.itemHeld || "None"}</p>
-                                <p><strong>Moves:</strong> {pokemon.moves.map(move => move.name).join(', ')}</p>
-                                <p> {flavorText}</p>
+                                <p><strong>Moves:</strong> {pokemon.moves ? pokemon.moves.map(move => move.name).join(', ') : 'None'}</p>
+                                <p>{flavorText}</p>
                                 <div className="d-flex justify-content-end">
-                                    <Button variant="primary" onClick={onTrade}>
+                                    <Button variant="primary" onClick={() => onTrade(pokemon)}>
                                         Trade
                                     </Button>
                                 </div>
@@ -84,16 +87,16 @@ const InventoryModal = ({ show, onHide, pokemon, onTrade }) => {
                 <hr className="my-4" />
                 <Row className="mt-4 justify-content-center">
                     <p><strong>Evolution Chain</strong></p>
-                    {evolutionDetails.map((evolution, index) => (
+                    {evolutionDetails.length > 0 ? evolutionDetails.map((evolution, index) => (
                         <Col key={index} xs="auto" className="mb-3">
                             <Card style={{ width: '10rem', cursor: 'pointer' }}>
-                                <Card.Img variant="top" src={`https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/${evolution._id}.png`} style={{ maxHeight: '8rem', objectFit: 'contain' }} />
+                                <Card.Img variant="top" src={`https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/${evolution.id}.png`} style={{ maxHeight: '8rem', objectFit: 'contain' }} />
                                 <Card.Body>
                                     <Card.Title className="text-center">{evolution.name}</Card.Title>
                                 </Card.Body>
                             </Card>
                         </Col>
-                    ))}
+                    )) : <p>No evolutions available</p>}
                 </Row>
             </Modal.Body>
         </Modal>
