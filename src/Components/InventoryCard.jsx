@@ -9,7 +9,7 @@ const InventoryCard = ({ userId = 0 }) => {
     const [selectedPokemon, setSelectedPokemon] = useState(null);
     const [isTradeModalOpen, setIsTradeModalOpen] = useState(false);
     const [inventory, setInventory] = useState([]);
-
+    
     useEffect(() => {
         fetchInventory();
     }, []);
@@ -46,6 +46,28 @@ const InventoryCard = ({ userId = 0 }) => {
 
     const closeTradeModal = () => {
         setIsTradeModalOpen(false);
+    };
+
+    const handleConfirmTrade = async (pokemon, minLevel) => {
+        try {
+            const trade = {
+                initiatingUserId: 0, // Hardcoded
+                receivingUserId: null, 
+                status: "PENDING", 
+                tradeDetails: [{
+                    userPokemonId: selectedPokemon.pokemonId,
+                    direction: "SEND",
+                    minLevel: minLevel
+                }]
+            };
+            console.log("Trade payload:", trade); // Log the trade payload
+
+            const response = await axios.post(`/trades`, trade);
+            console.log("Trade created:", response.data);
+            setIsTradeModalOpen(false);
+        } catch (error) {
+            console.error("There was an error creating the trade!", error);
+        }
     };
 
     const cardStyle = {
@@ -95,8 +117,7 @@ const InventoryCard = ({ userId = 0 }) => {
             <InventoryTradeModal
                 show={isTradeModalOpen}
                 onHide={closeTradeModal}
-                image={selectedPokemon ? `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/${selectedPokemon.pokemonId}.png` : ''}
-                pokemonList={inventory.map(pokemon => pokemon.name)}
+                onConfirmTrade={handleConfirmTrade}
             />
         </div>
     );
