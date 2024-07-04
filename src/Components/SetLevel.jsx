@@ -1,27 +1,26 @@
-import React, { useState } from "react";
+import React from 'react';
 
-function SetLevel() {
-  const [level, setLevel] = useState(0);
-
+function SetLevel({ onLevelChange }) {
   const handleChange = (e) => {
-    const newValue = Number(e.target.value);
-    if (newValue >= 0 && newValue <= 100) {
-      setLevel(newValue);
-    }
+    const inputValue = e.target.value;
+    
+      const newValue = Number(inputValue);
+      if (newValue >= 0 && newValue <= 100) {
+        onLevelChange(newValue);
+      }
+    
   };
 
   return (
-    <>
-      <div className="SetLevel">
-        <input
-          className="InputBox"
-          type="number"
-          value={level}
-          onChange={handleChange}
-          style={{ width: "60px", height: "30px", textAlign: "center" }}
-        />
-      </div>
-    </>
+    <div className="SetLevel">
+      <h4>LVL:</h4>
+      <input
+        className="InputBox"
+        type="number"
+        onChange={handleChange}
+        style={{ width: "70px", height: "30px", textAlign: "center" }}
+      />
+    </div>
   );
 }
 

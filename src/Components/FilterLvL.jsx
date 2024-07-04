@@ -24,6 +24,7 @@ function FilterLvL({ setMinLevel, setMaxLevel }) {
     <>
       <h4>lvl:</h4>
       <div className="FilterLvL">
+      
         <input
           className="InputBox"
           type="number"

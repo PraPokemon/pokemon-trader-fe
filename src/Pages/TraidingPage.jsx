@@ -1,18 +1,33 @@
+import { useState } from "react";
 import Navbar from "../Components/Navbar";
-import FilterGroup from "../Components/FilterGroup";
 import TradeCardGroup from "../Components/TradeCardGroup";
+import TradeFilterGroup from "../Components/TradeFilterGroup";
 
 function TradingPage() {
-    return (
-      <>
-      <Navbar/>
+  const [minLevel, setMinLevel] = useState(0);
+  const [maxLevel, setMaxLevel] = useState(100);
+  const [searchTerm, setSearchTerm] = useState("");
+  const updateMinLevel = (level) => setMinLevel(level);
+  const updateMaxLevel = (level) => setMaxLevel(level);
+  const updateSearchTerm = (term) => setSearchTerm(term);
+  return (
+    <>
+      <Navbar />
+      {/* <p>Current Search Term: {minLevel} {maxLevel} {searchTerm}</p> */}
       <div className="FilterGroup">
-        <FilterGroup />
+        <TradeFilterGroup
+          setMinLevel={updateMinLevel} 
+          setMaxLevel={updateMaxLevel} 
+          setSearchTerm={updateSearchTerm} 
+        />
       </div>
-       <TradeCardGroup/>
+      <TradeCardGroup
+        minLevel={minLevel}
+        maxLevel={maxLevel}
+        searchTerm={searchTerm}
+      />
+    </>
+  );
+}
 
-      </>
-    );
-  }
-  
-  export default TradingPage;
+export default TradingPage;

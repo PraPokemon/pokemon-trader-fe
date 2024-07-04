@@ -1,23 +1,26 @@
-import React from "react";
+import React, { useState } from 'react';
 import LoginModal from "../Components/LoginModal";
 import Navbar from "../Components/Navbar";
-import TradeCardGroup from "../Components/TradeCardGroup";
-import FilterGroup from "../Components/FilterGroup";
 import InventoryCard from "../Components/InventoryCard";
+import TradeFilterGroup from "../Components/TradeFilterGroup";
 
-
-/*TODO: -InventoryCard automatski popunit sa pokemonima iz databaze sa koreknim brojen, slikon, statovima...
-        -Trade funkcionalnost botuna u InventoryModalu
-        -InventoryModal sa apia dovest i prominit u kodu: ime, national dex, lvl, item...
-        */
 function Inventory() {
+  const [minLevel, setMinLevel] = useState(0);
+  const [maxLevel, setMaxLevel] = useState(100);
+  const [searchTerm, setSearchTerm] = useState("");
+  const updateMinLevel = (level) => setMinLevel(level);
+  const updateMaxLevel = (level) => setMaxLevel(level);
+  const updateSearchTerm = (term) => setSearchTerm(term);
     return (
       <>
       <Navbar/>
       <LoginModal/>
-
       <div className="FilterGroup">
-        <FilterGroup />
+      <TradeFilterGroup
+          setMinLevel={updateMinLevel} 
+          setMaxLevel={updateMaxLevel} 
+          setSearchTerm={updateSearchTerm} 
+        />
       </div>
 
       <div className="InventoryCard">
