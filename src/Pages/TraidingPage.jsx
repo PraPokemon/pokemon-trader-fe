@@ -12,13 +12,14 @@ function TradingPage() {
   const updateSearchTerm = (term) => setSearchTerm(term);
   return (
     <>
+      <LoginModal />
       <Navbar />
       {/* <p>Current Search Term: {minLevel} {maxLevel} {searchTerm}</p> */}
       <div className="FilterGroup">
         <TradeFilterGroup
-          setMinLevel={updateMinLevel} 
-          setMaxLevel={updateMaxLevel} 
-          setSearchTerm={updateSearchTerm} 
+          setMinLevel={updateMinLevel}
+          setMaxLevel={updateMaxLevel}
+          setSearchTerm={updateSearchTerm}
         />
       </div>
       <TradeCardGroup

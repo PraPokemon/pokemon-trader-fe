@@ -12,7 +12,6 @@ function App({ initialSearchTerm = "" }) {
   };
   return (
     <>
-      <LoginModal/>
       <Navbar />
       <div className="FilterGroup">
         <FilterGroup setSearchTerm={updateText}/>
