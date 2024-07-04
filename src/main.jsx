@@ -6,31 +6,28 @@ import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import PokedexEntrie from "./Pages/PokedexEntrie.jsx";
 import Inventory from "./Pages/Inventory.jsx";
 import TradingPage from "./Pages/TraidingPage.jsx";
-import { LoginContext } from "./Contexts/LoginContext.jsx";
 
 const router = createBrowserRouter([
   {
     path: "/",
-    element: <TradingPage/>,
+    element: <TradingPage />,
   },
   {
     path: "/Pokedex",
-    element: <App/>,
+    element: <App />,
   },
   {
     path: "/PokedexEntrie",
-    element: <PokedexEntrie/>,
+    element: <PokedexEntrie />,
   },
   {
     path: "/Inventory",
-    element: <Inventory/>,
+    element: <Inventory />,
   },
-  
 ]);
 
 ReactDOM.createRoot(document.getElementById("root")).render(
   <React.StrictMode>
     <RouterProvider router={router} />
-    
   </React.StrictMode>
 );

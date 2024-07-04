@@ -8,13 +8,19 @@ function TradingPage() {
   const [minLevel, setMinLevel] = useState(0);
   const [maxLevel, setMaxLevel] = useState(100);
   const [searchTerm, setSearchTerm] = useState("");
+  const [loggedInUser, setLoggedInUser] = useState('');
+
+  const handleLoginSuccess = (username) => {
+    setLoggedInUser(username);
+  };
+
   const updateMinLevel = (level) => setMinLevel(level);
   const updateMaxLevel = (level) => setMaxLevel(level);
   const updateSearchTerm = (term) => setSearchTerm(term);
   return (
     <>
-      <LoginModal />
-      <Navbar />
+      <LoginModal onLoginSuccess={handleLoginSuccess} />
+      <Navbar username={loggedInUser} />
       {/* <p>Current Search Term: {minLevel} {maxLevel} {searchTerm}</p> */}
       <div className="FilterGroup">
         <TradeFilterGroup
