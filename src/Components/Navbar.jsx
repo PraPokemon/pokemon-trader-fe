@@ -13,10 +13,15 @@ function NavbarPokemon() {
       if (newUsername !== username) {
         setUsername(newUsername);
       }
-    }, 5000); // Check for changes every 5 seconds
+    }, 5000);
 
-    return () => clearInterval(interval); // Cleanup on component unmount
+    return () => clearInterval(interval);
   }, [username]);
+
+  const handleLogout = () => {
+    localStorage.removeItem('username');
+    localStorage.removeItem('sessionToken');
+  };
 
   return (
     <>
@@ -33,7 +38,7 @@ function NavbarPokemon() {
               <Nav.Link as={Link} to="/Inventory">Inventory</Nav.Link>
             </Nav>
             <Navbar.Text className="ms-auto text-yellow">
-              Signed in as: <a href="#login">{username}</a>
+            <a href="#" onClick={handleLogout}>Signed in as: {username}</a>
             </Navbar.Text>
           </Navbar.Collapse>
         </Container>
