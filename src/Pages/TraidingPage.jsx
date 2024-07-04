@@ -8,14 +8,11 @@ function TraidingPage() {
   const [minLevel, setMinLevel] = useState(0);
   const [maxLevel, setMaxLevel] = useState(100);
   const [searchTerm, setSearchTerm] = useState("");
-<<<<<<< HEAD
-=======
   const [loggedInUser, setLoggedInUser] = useState('');
 
   const handleLoginSuccess = (username) => {
     setLoggedInUser(username);
   };
->>>>>>> refs/remotes/origin/main
 
   const updateMinLevel = (level) => setMinLevel(level);
   const updateMaxLevel = (level) => setMaxLevel(level);

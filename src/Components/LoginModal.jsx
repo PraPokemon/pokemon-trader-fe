@@ -31,8 +31,6 @@ function LoginModal({ onLoginSuccess }) {
       const response = await axios.post("/users/login", { username, password });
       
       
-      const response = await axios.post("/users/login", { username, password });
-      
       if (response.status === 200) {
         // console.log('Login successful:', response.data," THat was the responce data");
         localStorage.setItem('username', username);

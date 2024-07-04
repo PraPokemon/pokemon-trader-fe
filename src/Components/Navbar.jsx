@@ -1,5 +1,4 @@
 import { useState, useEffect } from "react";
-import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import Container from "react-bootstrap/Container";
 import Nav from "react-bootstrap/Nav";
@@ -24,7 +23,7 @@ function NavbarPokemon() {
 
   const pokeballIcon = "https://cdn0.iconfinder.com/data/icons/social-messaging-productivity-6/128/pokemon-pokeball-512.png";
 
-  const [username, setUsername] = useState(localStorage.getItem('username') || '');
+  
 
   useEffect(() => {
     const interval = setInterval(() => {
