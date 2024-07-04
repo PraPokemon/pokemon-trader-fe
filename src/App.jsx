@@ -3,7 +3,6 @@ import PokedexCardGroup from "./Components/PokedexCardGroup";
 import "./App.css";
 import FilterGroup from "./Components/FilterGroup";
 import Navbar from "./Components/Navbar";
-import LoginModal from "./Components/LoginModal";
 
 function App({ initialSearchTerm = "" }) {
   const [searchTerm, setSearchTerm] = useState(initialSearchTerm);
@@ -12,7 +11,6 @@ function App({ initialSearchTerm = "" }) {
   };
   return (
     <>
-      <LoginModal/>
       <Navbar />
       <div className="FilterGroup">
         <FilterGroup setSearchTerm={updateText}/>

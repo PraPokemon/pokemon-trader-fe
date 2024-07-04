@@ -10,21 +10,20 @@ import TradingPage from "./Pages/TraidingPage.jsx";
 const router = createBrowserRouter([
   {
     path: "/",
-    element: <TradingPage/>,
+    element: <TradingPage />,
   },
   {
     path: "/Pokedex",
-    element: <App/>,
+    element: <App />,
   },
   {
     path: "/PokedexEntrie",
-    element: <PokedexEntrie/>,
+    element: <PokedexEntrie />,
   },
   {
     path: "/Inventory",
-    element: <Inventory/>,
+    element: <Inventory />,
   },
-  
 ]);
 
 ReactDOM.createRoot(document.getElementById("root")).render(
