@@ -3,7 +3,8 @@ import { useEffect } from "react";
 import axios from "axios";
 import Button from "react-bootstrap/Button";
 import TradeCard from "./TradeCard";
-function TradeCardGroup() {
+
+function TradeCardGroup({ minLevel, maxLevel, searchTerm }) {
   const [pokeData, setPokeData] = useState([]);
   const [loading, setLoading] = useState(true);
   const [url, setUrl] = useState("https://pokeapi.co/api/v2/pokemon/");
