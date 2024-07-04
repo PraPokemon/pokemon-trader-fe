@@ -1,14 +1,25 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import Container from "react-bootstrap/Container";
 import Nav from "react-bootstrap/Nav";
 import Navbar from "react-bootstrap/Navbar";
 
 function NavbarPokemon() {
-  const [Username, setUsername] = useState("User not found");
+  const [username, setUsername] = useState(localStorage.getItem('username') || '');
+
+  useEffect(() => {
+    const interval = setInterval(() => {
+      const newUsername = localStorage.getItem('username');
+      if (newUsername !== username) {
+        setUsername(newUsername);
+      }
+    }, 5000); // Check for changes every 5 seconds
+
+    return () => clearInterval(interval); // Cleanup on component unmount
+  }, [username]);
+
   return (
     <>
-      
       <Navbar
         expand="lg"
         className="PokemonNavbar "
@@ -22,7 +33,7 @@ function NavbarPokemon() {
               <Nav.Link as={Link} to="/Inventory">Inventory</Nav.Link>
             </Nav>
             <Navbar.Text className="ms-auto text-yellow">
-              Signed in as: <a href="#login">{Username}</a>
+              Signed in as: <a href="#login">{username}</a>
             </Navbar.Text>
           </Navbar.Collapse>
         </Container>
