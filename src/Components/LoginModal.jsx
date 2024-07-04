@@ -1,4 +1,4 @@
-import React, { createContext, useState } from "react";
+import React, { createContext, useState, useEffect } from "react";
 import Button from "react-bootstrap/Button";
 import Modal from "react-bootstrap/Modal";
 import { Form } from "react-bootstrap";
@@ -7,6 +7,7 @@ import axios from "../api/axiosConfig";
 import SignupModal from "./SignUpModal";
 
 function LoginModal({ onLoginSuccess }) {
+  const initialShowLoginModalState = !!localStorage.getItem('username');
   const [showLoginModal, setShowLoginModal] = useState(true);
   const [showSignupModal, setShowSignupModal] = useState(false);
   const [password, setPassword] = useState("");
@@ -24,7 +25,11 @@ function LoginModal({ onLoginSuccess }) {
 
   const handleLogin = async () => {
     console.log("Attempting login with username:", username);
+    console.log("Attempting login with username:", username);
     try {
+      
+      const response = await axios.post("/users/login", { username, password });
+      
       
       const response = await axios.post("/users/login", { username, password });
       

@@ -1,4 +1,5 @@
 import { useState, useEffect } from "react";
+import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import Container from "react-bootstrap/Container";
 import Nav from "react-bootstrap/Nav";
@@ -23,6 +24,24 @@ function NavbarPokemon() {
 
   const pokeballIcon = "https://cdn0.iconfinder.com/data/icons/social-messaging-productivity-6/128/pokemon-pokeball-512.png";
 
+  const [username, setUsername] = useState(localStorage.getItem('username') || '');
+
+  useEffect(() => {
+    const interval = setInterval(() => {
+      const newUsername = localStorage.getItem('username');
+      if (newUsername !== username) {
+        setUsername(newUsername);
+      }
+    }, 5000);
+
+    return () => clearInterval(interval);
+  }, [username]);
+
+  const handleLogout = () => {
+    localStorage.removeItem('username');
+    localStorage.removeItem('sessionToken');
+  };
+
   return (
     <>
       <Navbar expand="lg" className="PokemonNavbar ">
@@ -42,7 +61,7 @@ function NavbarPokemon() {
               <Nav.Link as={Link} to="/Inventory" className="NavLink">Inventory</Nav.Link>
             </Nav>
             <Navbar.Text className="ms-auto text-yellow">
-              Signed in as: {username}
+            <a href="#" onClick={handleLogout}>Signed in as: {username}</a>
             </Navbar.Text>
           </Navbar.Collapse>
         </Container>

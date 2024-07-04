@@ -1,8 +1,6 @@
 import React, { useState, useEffect } from "react";
 import axios from "../api/axiosConfig";
 import Button from "react-bootstrap/Button";
-import PokemonFilterSearch from "./PokemonFilterSerch";
-import LevelFilter from "./FilterLvL";
 import Card from "./Card";
 
 function PokedexCardGroup({searchTerm}) {
