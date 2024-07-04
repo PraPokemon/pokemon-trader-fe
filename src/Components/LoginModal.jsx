@@ -15,7 +15,7 @@ function LoginModal() {
   const [error, setError] = useState('');
 
   const handleLoginClose = () => setShowLoginModal(false);
-  const handleLoginShow = () => setShowLoginModal(true);
+  const han = () => setShowLoginModal(true);
   const handleSignupClose = () => setShowSignupModal(false);
   const handleSignupShow = () => setShowSignupModal(true);
 
