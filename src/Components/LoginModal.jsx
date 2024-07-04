@@ -1,43 +1,49 @@
-import { useState } from "react";
+import React, { createContext, useState } from "react";
 import Button from "react-bootstrap/Button";
 import Modal from "react-bootstrap/Modal";
 import { Form } from "react-bootstrap";
 import { Link } from "react-router-dom";
-import axios from '../api/axiosConfig';
+import axios from "../api/axiosConfig";
 import SignupModal from "./SignUpModal";
 
-
-function LoginModal() {
+function LoginModal({ onLoginSuccess }) {
   const [showLoginModal, setShowLoginModal] = useState(true);
   const [showSignupModal, setShowSignupModal] = useState(false);
-  const [username, setUsername] = useState('');
-  const [password, setPassword] = useState('');
-  const [error, setError] = useState('');
+  const [password, setPassword] = useState("");
+  const [error, setError] = useState("");
+  const [username, setUsername] = useState("");
+
+  const handleUsernameChange = (e) => {
+    setUsername(e.target.value);
+  };
 
   const handleLoginClose = () => setShowLoginModal(false);
   const han = () => setShowLoginModal(true);
   const handleSignupClose = () => setShowSignupModal(false);
   const handleSignupShow = () => setShowSignupModal(true);
 
-
   const handleLogin = async () => {
-    console.log('Attempting login with username:', username);
+    console.log("Attempting login with username:", username);
     try {
-      const response = await axios.post('/users/login', { username, password });
+      
+      const response = await axios.post("/users/login", { username, password });
+      
       if (response.status === 200) {
-        // Handle successful login
-        console.log('Login successful:', response.data);
-        setShowLoginModal(false); // Close the modal on successful login
+        // console.log('Login successful:', response.data," THat was the responce data");
+        localStorage.setItem('username', username);
+
+        setShowLoginModal(false);
+        onLoginSuccess(username);
       }
     } catch (err) {
-      console.error('Login failed:', err);
-      setError('Invalid username or password');
+      console.error("Login failed:", err);
+      setError("Invalid username or password");
     }
   };
 
   const handleSignupClick = () => {
-    setShowLoginModal(false); // Close the login modal
-    setShowSignupModal(true); // Open the signup modal
+    setShowLoginModal(false);
+    setShowSignupModal(true);
   };
 
   return (
@@ -52,13 +58,13 @@ function LoginModal() {
           <Modal.Title>Login</Modal.Title>
         </Modal.Header>
         <Modal.Body>
-          {error && <p style={{ color: 'red' }}>{error}</p>}
+          {error && <p style={{ color: "red" }}>{error}</p>}
           <Form.Group className="mb-3" controlId="username">
             <Form.Label>Username</Form.Label>
-            <Form.Control 
-              placeholder="Lord-Helix" 
+            <Form.Control
+              placeholder="Lord-Helix"
               value={username}
-              onChange={(e) => setUsername(e.target.value)}
+              onChange={handleUsernameChange}
             />
           </Form.Group>
           <>
@@ -78,11 +84,15 @@ function LoginModal() {
           </>
         </Modal.Body>
         <Modal.Footer>
-          <Link to="#" onClick={handleSignupClick}>Sign Up</Link>
+          <Link to="#" onClick={handleSignupClick}>
+            Sign Up
+          </Link>
           <Button variant="secondary" onClick={handleLoginClose}>
             Close
           </Button>
-          <Button variant="primary" onClick={handleLogin}>Login</Button>
+          <Button variant="primary" onClick={handleLogin}>
+            Login
+          </Button>
         </Modal.Footer>
       </Modal>
       <SignupModal show={showSignupModal} onHide={handleSignupClose} />
