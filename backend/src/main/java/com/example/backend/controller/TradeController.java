@@ -3,6 +3,8 @@ package com.example.backend.controller;
 import com.example.backend.model.Trade;
 import com.example.backend.service.TradeService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -25,8 +27,9 @@ public class TradeController {
     }
 
     @PostMapping
-    public Trade createTrade(@RequestBody Trade trade) {
-        return tradeService.createTrade(trade);
+    public ResponseEntity<Trade> createTrade(@RequestBody Trade trade) {
+        Trade createdTrade = tradeService.createTrade(trade);
+        return new ResponseEntity<>(createdTrade, HttpStatus.CREATED);
     }
 
     @PutMapping("/{id}")

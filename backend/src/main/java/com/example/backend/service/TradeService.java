@@ -1,6 +1,8 @@
 package com.example.backend.service;
 
 import com.example.backend.model.Trade;
+import com.example.backend.model.TradeDetails;
+import com.example.backend.repository.TradeDetailsRepository;
 import com.example.backend.repository.TradeRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -12,6 +14,12 @@ public class TradeService {
 
     @Autowired
     private TradeRepository tradeRepository;
+    
+    @Autowired
+    private SequenceService sequenceService; 
+    
+    @Autowired
+    private TradeDetailsRepository tradeDetailsRepository;
 
     public List<Trade> getAllTrades() {
         return tradeRepository.findAll();
@@ -22,7 +30,16 @@ public class TradeService {
     }
 
     public Trade createTrade(Trade trade) {
-        return tradeRepository.save(trade);
+        trade.setTradeId(sequenceService.getNextSequence("trade_sequence"));
+        tradeRepository.save(trade);
+
+        for (TradeDetails details : trade.getTradeDetails()) {
+            details.setTradeDetailId(sequenceService.getNextSequence("trade_detail_sequence"));
+            details.setTradeId(trade.getTradeId());
+            tradeDetailsRepository.save(details);
+        }
+
+        return trade;
     }
 
     public Trade updateTrade(int id, Trade tradeDetails) {

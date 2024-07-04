@@ -70,5 +70,8 @@ public class PokemonService {
 	public Optional<Pokemon> getPokemonByName(String name) {
 	    return pokemonRepository.findByName(name);
 	}
+	public List<Pokemon> getAllPokemonsUnpaginated() {
+		return pokemonRepository.findAll();
+	}
 
 }

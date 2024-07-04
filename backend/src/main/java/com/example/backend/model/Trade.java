@@ -1,5 +1,7 @@
 package com.example.backend.model;
 
+import java.util.List;
+
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 import lombok.Data;
@@ -16,4 +18,5 @@ public class Trade {
     private int initiatingUserId;
     private int receivingUserId;
     private TradeStatus status;  
+    private List<TradeDetails> tradeDetails;
 }

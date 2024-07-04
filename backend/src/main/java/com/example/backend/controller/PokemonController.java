@@ -19,6 +19,11 @@ public class PokemonController {
 
     @Autowired
     private PokemonService pokemonService;
+    
+    @GetMapping("/all")
+    public List<Pokemon> getAllPokemonsUnpaginated() {
+        return pokemonService.getAllPokemonsUnpaginated();
+    }
 
     @GetMapping
     public Map<String, Object> getAllPokemons(
