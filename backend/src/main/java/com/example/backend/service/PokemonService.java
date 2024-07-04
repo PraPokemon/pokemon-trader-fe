@@ -67,4 +67,8 @@ public class PokemonService {
                 .distinct()
                 .collect(Collectors.toList());
 	}
+	public Optional<Pokemon> getPokemonByName(String name) {
+	    return pokemonRepository.findByName(name);
+	}
+
 }

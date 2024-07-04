@@ -69,4 +69,8 @@ public class UserInventoryService {
 
         return userInventoryRepository.save(userInventory);
     }
+
+	public Optional<UserInventory> findByUserId(int userId) {
+		return userInventoryRepository.findByUserId(userId);
+	}
 }

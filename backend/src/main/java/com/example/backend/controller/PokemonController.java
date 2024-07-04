@@ -5,6 +5,7 @@ import com.example.backend.model.Pokemon;
 import com.example.backend.service.PokemonService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.HashMap;
@@ -56,5 +57,9 @@ public class PokemonController {
     public List<Pokemon.Move> getMovesByPokemonId(@PathVariable int pokemonId) {
         Pokemon pokemon = pokemonService.getPokemonById(pokemonId).orElseThrow(() -> new RuntimeException("Pokemon not found"));
         return pokemon.getMoves();
+    }
+    @GetMapping("/name/{name}")
+    public Optional<Pokemon> getPokemonByName(@PathVariable String name) {
+        return pokemonService.getPokemonByName(name);
     }
 }

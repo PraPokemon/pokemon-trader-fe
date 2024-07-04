@@ -4,6 +4,7 @@ import com.example.backend.model.UserInventory;
 import com.example.backend.model.UserPokemon;
 import com.example.backend.service.UserInventoryService;
 import org.springframework.beans.factory.annotation.Autowired;
+
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -31,6 +32,12 @@ public class UserInventoryController {
     @PostMapping
     public UserInventory createUserInventory(@RequestBody UserInventory userInventory) {
         return userInventoryService.save(userInventory);
+    }
+    @GetMapping("/userId/{userId}")
+    public ResponseEntity<UserInventory> getUserInventoryByUserId(@PathVariable int userId) {
+        return userInventoryService.findByUserId(userId)
+                .map(userInventory -> ResponseEntity.ok().body(userInventory))
+                .orElse(ResponseEntity.notFound().build());
     }
 
     @PutMapping("/{id}")
