@@ -2,6 +2,7 @@ import { useState } from "react";
 import Navbar from "../Components/Navbar";
 import TradeCardGroup from "../Components/TradeCardGroup";
 import TradeFilterGroup from "../Components/TradeFilterGroup";
+import LoginModal from "../Components/LoginModal";
 
 function TradingPage() {
   const [minLevel, setMinLevel] = useState(0);

@@ -1,8 +1,6 @@
 import React, { useState } from 'react';
-import LoginModal from "../Components/LoginModal";
 import Navbar from "../Components/Navbar";
 import InventoryCard from "../Components/InventoryCard";
-import TradeFilterGroup from "../Components/TradeFilterGroup";
 
 function Inventory() {
   // const [minLevel, setMinLevel] = useState(0);
